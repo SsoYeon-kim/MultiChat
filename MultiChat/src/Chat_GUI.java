@@ -23,40 +23,40 @@ import java.awt.Color;
 
 public class Chat_GUI extends JFrame  {
 
-   // ·Î±×ÀÎ ÆĞ³Î
+   // ë¡œê·¸ì¸ íŒ¨ë„
    private JPanel loginPanel;
-   // ·Î±×ÀÎ ¹öÆ°
+   // ë¡œê·¸ì¸ ë²„íŠ¼
    protected JButton loginButton;
    
-   // ´ëÈ­¸í ¶óº§
+   // ëŒ€í™”ëª… ë¼ë²¨
    private JLabel inLabel;
-   // ´ëÈ­¸í Ãâ·Â ¶óº§
+   // ëŒ€í™”ëª… ì¶œë ¥ ë¼ë²¨
    protected JLabel outLabel;
-   // ´ëÈ­¸í ÀÔ·Â ÅØ½ºÆ®ÇÊµå
+   // ëŒ€í™”ëª… ì…ë ¥ í…ìŠ¤íŠ¸í•„ë“œ
    protected JTextField idInput;
    
-   // ´Ğ³×ÀÓ ¶óº§
+   // ë‹‰ë„¤ì„ ë¼ë²¨
    private JLabel nickLabel;
-   // ´Ğ³×ÀÓ ÀÔ·Â ÅØ½ºÆ® ÇÊµå
+   // ë‹‰ë„¤ì„ ì…ë ¥ í…ìŠ¤íŠ¸ í•„ë“œ
    protected JTextField nick_input;
    
-   // ·Î±×¾Æ¿ô ÆĞ³Î
+   // ë¡œê·¸ì•„ì›ƒ íŒ¨ë„
    private JPanel logoutPanel;
-   // ·Î±×¾Æ¿ô ¹öÆ°
+   // ë¡œê·¸ì•„ì›ƒ ë²„íŠ¼
    protected JButton logoutButton;
    
-   // ¸Ş½ÃÁö ÀÔ·Â ÆĞ³Î ±¸¼º
+   // ë©”ì‹œì§€ ì…ë ¥ íŒ¨ë„ êµ¬ì„±
    private JPanel msgPanel;
-   // ¸Ş½ÃÁö ÀÔ·Â ÅØ½ºÆ®ÇÊµå
+   // ë©”ì‹œì§€ ì…ë ¥ í…ìŠ¤íŠ¸í•„ë“œ
    protected JTextField msgInput;
-   // Á¾·á ¹öÆ°
+   // ì¢…ë£Œ ë²„íŠ¼
    
 
-   // È­¸é ±¸¼º ÀüÈ¯À» À§ÇÑ Ä«µå ·¹ÀÌ¾Æ¿ô
+   // í™”ë©´ êµ¬ì„± ì „í™˜ì„ ìœ„í•œ ì¹´ë“œ ë ˆì´ì•„ì›ƒ
    protected Container tab;
    protected CardLayout cardLayout;
    
-   // Ã¤ÆÃ ³»¿ë Ãâ·ÂÃ¢ 
+   // ì±„íŒ… ë‚´ìš© ì¶œë ¥ì°½ 
    protected JTextArea msgOut;
    
    protected String id;           
@@ -65,30 +65,30 @@ public class Chat_GUI extends JFrame  {
    protected JButton saveButton;
      
 
-   // »ı¼ºÀÚ
+   // ìƒì„±ì
    public Chat_GUI()
    {
-      // ¸ŞÀÎ ÇÁ·¹ÀÓ ±¸¼º
-      super("::¸ÖÆ¼Ãª::");
+      // ë©”ì¸ í”„ë ˆì„ êµ¬ì„±
+      super("::ë©€í‹°ì±—::");
          
-         // ·Î±×ÀÎ ÆĞ³Î È­¸é ±¸¼º
+         // ë¡œê·¸ì¸ íŒ¨ë„ í™”ë©´ êµ¬ì„±
          loginPanel = new JPanel();
          loginPanel.setBackground(new Color(230, 230, 250));
          
-         // ·Î±×ÀÎ ÆĞ³Î ·¹ÀÌ¾Æ¿ô ¼³Á¤
+         // ë¡œê·¸ì¸ íŒ¨ë„ ë ˆì´ì•„ì›ƒ ì„¤ì •
          loginPanel.setLayout(new FlowLayout());
          
-         // ·Î±×ÀÎ ÀÔ·ÂÇÊµå/¹öÆ° »ı¼º
+         // ë¡œê·¸ì¸ ì…ë ¥í•„ë“œ/ë²„íŠ¼ ìƒì„±
          idInput = new JTextField(15);
-         loginButton = new JButton("·Î±×ÀÎ");
+         loginButton = new JButton("ë¡œê·¸ì¸");
          loginButton.setBackground(new Color(216, 191, 216));
-         loginButton.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 16));
+         loginButton.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 16));
          nick_input = new JTextField(15);
          
-         inLabel = new JLabel("ÀÌ¸§ ");
-         inLabel.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 15));
-         nickLabel = new JLabel("´Ğ³×ÀÓ");
-         nickLabel.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 15));
+         inLabel = new JLabel("ì´ë¦„ ");
+         inLabel.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 15));
+         nickLabel = new JLabel("ë‹‰ë„¤ì„");
+         nickLabel.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 15));
          
          loginPanel.add(inLabel);
          loginPanel.add(idInput);
@@ -96,40 +96,40 @@ public class Chat_GUI extends JFrame  {
          loginPanel.add(nick_input);
          loginPanel.add(loginButton);
          
-         // ·Î±×¾Æ¿ô ÆĞ³Î ±¸¼º
+         // ë¡œê·¸ì•„ì›ƒ íŒ¨ë„ êµ¬ì„±
          logoutPanel = new JPanel();
          logoutPanel.setBackground(new Color(230, 230, 250));
          
-         // ·Î±×¾Æ¿ô ÆĞ³Î ·¹ÀÌ¾Æ¿ô ¼³Á¤
+         // ë¡œê·¸ì•„ì›ƒ íŒ¨ë„ ë ˆì´ì•„ì›ƒ ì„¤ì •
          logoutPanel.setLayout(new BorderLayout());
          outLabel = new JLabel();
-         logoutButton = new JButton("·Î±×¾Æ¿ô");
+         logoutButton = new JButton("ë¡œê·¸ì•„ì›ƒ");
          logoutButton.setBackground(new Color(216, 191, 216));
          
-         // ·Î±×¾Æ¿ô ÆĞ³Î¿¡ À§Á¬ ±¸¼º
+         // ë¡œê·¸ì•„ì›ƒ íŒ¨ë„ì— ìœ„ì ¯ êµ¬ì„±
          logoutPanel.add(outLabel, BorderLayout.CENTER);
          logoutPanel.add(logoutButton, BorderLayout.EAST);
          
-         // ¸Ş½ÃÁö ÀÔ·Â ÆĞ³Î ±¸¼º
+         // ë©”ì‹œì§€ ì…ë ¥ íŒ¨ë„ êµ¬ì„±
          msgPanel = new JPanel();
-         // ¸Ş½ÃÁö ÀÔ·Â Å×½ºÆ®ÇÊµå
+         // ë©”ì‹œì§€ ì…ë ¥ í…ŒìŠ¤íŠ¸í•„ë“œ
          msgPanel.setLayout(new BorderLayout());
          msgInput = new JTextField(30);
          msgInput.setBackground(new Color(255, 255, 255));
-         // Á¾·á ¹öÆ°
+         // ì¢…ë£Œ ë²„íŠ¼
          
          
-         // ¸Ş½ÃÁö ÀÔ·Â ÆĞ³Î¿¡ À§Á¬ ±¸¼º
-         exitButton = new JButton("Á¾·á");
+         // ë©”ì‹œì§€ ì…ë ¥ íŒ¨ë„ì— ìœ„ì ¯ êµ¬ì„±
+         exitButton = new JButton("ì¢…ë£Œ");
          exitButton.setBackground(new Color(216, 191, 216));
-         saveButton = new JButton("ÀúÀå");
+         saveButton = new JButton("ì €ì¥");
          saveButton.setBackground(new Color(216, 191, 216));
          
          msgPanel.add(msgInput, BorderLayout.WEST);
          msgPanel.add(exitButton, BorderLayout.CENTER);
          msgPanel.add(saveButton, BorderLayout.EAST);
          
-            // ·Î±×ÀÎ/·Î±×¾Æ¿ô ÆĞ³Î Áß ÇÏ³ª¸¦ ¼±ÅÃÇÏ´Â CardLayout ÆĞ³Î
+            // ë¡œê·¸ì¸/ë¡œê·¸ì•„ì›ƒ íŒ¨ë„ ì¤‘ í•˜ë‚˜ë¥¼ ì„ íƒí•˜ëŠ” CardLayout íŒ¨ë„
             tab = new JPanel();
             tab.setBackground(new Color(230, 230, 250));
             cardLayout = new CardLayout();
@@ -137,14 +137,14 @@ public class Chat_GUI extends JFrame  {
             tab.add(loginPanel, "login");
             tab.add(logoutPanel, "logout");
          
-         // ¸Ş½ÃÁö Ãâ·Â ¿µ¿ª ÃÊ±âÈ­
+         // ë©”ì‹œì§€ ì¶œë ¥ ì˜ì—­ ì´ˆê¸°í™”
          msgOut = new JTextArea("", 10, 30);
          msgOut.setBackground(new Color(248, 248, 255));
-         // JTextAreaÀÇ ³»¿ëÀ» ¼öÁ¤ÇÏÁö ¸øÇÏµµ·Ï ÇÑ´Ù. Áï, Ãâ·Â Àü¿ëÀ¸·Î »ç¿ëÇÑ´Ù.
+         // JTextAreaì˜ ë‚´ìš©ì„ ìˆ˜ì •í•˜ì§€ ëª»í•˜ë„ë¡ í•œë‹¤. ì¦‰, ì¶œë ¥ ì „ìš©ìœ¼ë¡œ ì‚¬ìš©í•œë‹¤.
          msgOut.setEditable(false);
          
-         // ¸Ş½ÃÁö Ãâ·Â ¿µ¿ª ½ºÅ©·Ñ ¹Ù¸¦ ±¸¼ºÇÑ´Ù
-         // ¼öÁ÷ ½ºÅ©·Ñ ¹Ù´Â Ç×»ó ³ªÅ¸³»°í ¼öÆò ½ºÅ©·Ñ ¹Ù´Â ÇÊ¿äÇÒ ¶§ ³ªÅ¸³ªµµ·Ï ÇÁ·Î±×·¡¹ÖÇÑ´Ù.
+         // ë©”ì‹œì§€ ì¶œë ¥ ì˜ì—­ ìŠ¤í¬ë¡¤ ë°”ë¥¼ êµ¬ì„±í•œë‹¤
+         // ìˆ˜ì§ ìŠ¤í¬ë¡¤ ë°”ëŠ” í•­ìƒ ë‚˜íƒ€ë‚´ê³  ìˆ˜í‰ ìŠ¤í¬ë¡¤ ë°”ëŠ” í•„ìš”í•  ë•Œ ë‚˜íƒ€ë‚˜ë„ë¡ í”„ë¡œê·¸ë˜ë°í•œë‹¤.
          JScrollPane jsp = new JScrollPane(msgOut, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
          jsp.setBackground(new Color(221, 160, 221));
          getContentPane().add(tab, BorderLayout.NORTH);
@@ -159,7 +159,7 @@ public class Chat_GUI extends JFrame  {
    
    public void addButtonActionListener(ActionListener listener)
    {
-      // ÀÌº¥Æ® ¸®½º³Ê µî·Ï
+      // ì´ë²¤íŠ¸ ë¦¬ìŠ¤ë„ˆ ë“±ë¡
       loginButton.addActionListener(listener);
       logoutButton.addActionListener(listener);
       exitButton.addActionListener(listener);

@@ -47,21 +47,21 @@ public class MultiChatController implements Runnable {
 	
 	File savefile = new File("C:/Member/msgsave.txt");
 	
-	// ºä Å¬·¡½º ÂüÁ¶ °´Ã¼
+	// ë·° í´ë˜ìŠ¤ ì°¸ì¡° ê°ì²´
 			private final Chat_GUI v;
-			// µ¥ÀÌÅÍ Å¬·¡½º ÂüÁ¶ °´Ã¼
+			// ë°ì´í„° í´ë˜ìŠ¤ ì°¸ì¡° ê°ì²´
 			private final MultiChatData chatData;
 			public MultiChatController(MultiChatData chatData, Chat_GUI v)
 			{
-				// ·Î°Å °´Ã¼ ÃÊ±âÈ­
+				// ë¡œê±° ê°ì²´ ì´ˆê¸°í™”
 				logger = Logger.getLogger(this.getClass().getName());
 				
-				// ¸ğµ¨°ú ºä Å¬·¡½º ÂüÁ¶
+				// ëª¨ë¸ê³¼ ë·° í´ë˜ìŠ¤ ì°¸ì¡°
 				this.chatData = chatData;
 				this.v = v;
 			}
 			
-			// µ¥ÀÌÅÍ °´Ã¼¿¡¼­ µ¥ÀÌÅÍ º¯È­¸¦ Ã³¸®ÇÒ UI °´Ã¼ Ãß°¡       
+			// ë°ì´í„° ê°ì²´ì—ì„œ ë°ì´í„° ë³€í™”ë¥¼ ì²˜ë¦¬í•  UI ê°ì²´ ì¶”ê°€       
 			public void appMain()        
 			{
 				chatData.addObj(v.msgOut);
@@ -78,21 +78,21 @@ public class MultiChatController implements Runnable {
 							v.id = v.idInput.getText();
 							v.nickname = v.nick_input.getText();						
 							
-							v.outLabel.setText(" ÀÌ¸§: " + v.id + "     ´Ğ³×ÀÓ : " + v.nickname);
+							v.outLabel.setText(" ì´ë¦„: " + v.id + "     ë‹‰ë„¤ì„ : " + v.nickname);
 							v.cardLayout.show(v.tab, "logout");
 							connectServer();
 						}
 						else if(obj == v.logoutButton)
 						{
-							// ·Î±×¾Æ¿ô ¸Ş½ÃÁö Àü¼Û
+							// ë¡œê·¸ì•„ì›ƒ ë©”ì‹œì§€ ì „ì†¡
 							outMsg.println(gson.toJson(new Message(v.id, v.nickname, "", "logout", "")));
-							// ´ëÈ­ Ã¢ Å¬¸®¾î
+							// ëŒ€í™” ì°½ í´ë¦¬ì–´
 							v.msgOut.setText("");
-							// ·Î±×ÀÎ ÆĞ³Î·Î ÀüÈ¯
+							// ë¡œê·¸ì¸ íŒ¨ë„ë¡œ ì „í™˜
 							v.cardLayout.show(v.tab, "login");
 							try { 
 	                             BufferedWriter msg_save = new BufferedWriter(new FileWriter(savefile, true));  
-	                             msg_save.write("\r\n" + "´Ù¸¥ Á¢¼ÓÀÚ ÀúÀå : " + "\r" );
+	                             msg_save.write("\r\n" + "ë‹¤ë¥¸ ì ‘ì†ì ì €ì¥ : " + "\r" );
 	                             
 	                             msg_save.close();
 	                          }
@@ -116,16 +116,16 @@ public class MultiChatController implements Runnable {
 						}
 						else if(obj == v.msgInput)
 						{
-							// ¸Ş½ÃÁö Àü¼Û
+							// ë©”ì‹œì§€ ì „ì†¡
 							outMsg.println(gson.toJson(new Message("", v.nickname, v.msgInput.getText(), "msg", "")));
-							// ÀÔ·Â Ã¢ Å¬¸®¾î
+							// ì…ë ¥ ì°½ í´ë¦¬ì–´
 							v.msgInput.setText("");
 						}
 						else if(obj == v.exitButton)
 						{
 							try { 
 	                             BufferedWriter msg_save = new BufferedWriter(new FileWriter(savefile, true));  
-	                             msg_save.write("\r\n" + "´Ù¸¥ Á¢¼ÓÀÚ ÀúÀå : " + "\r" );
+	                             msg_save.write("\r\n" + "ë‹¤ë¥¸ ì ‘ì†ì ì €ì¥ : " + "\r" );
 	                             
 	                             msg_save.close();
 	                          }
@@ -142,7 +142,7 @@ public class MultiChatController implements Runnable {
 	                             BufferedWriter msg_save = new BufferedWriter(new FileWriter(savefile, true));  
 	                             msg_save.write(v.msgOut.getText());
 	                             msg_save.close();
-	                             JOptionPane.showMessageDialog(v, "´ëÈ­ ³»¿ëÀÌ ÀúÀåµÇ¾ú½À´Ï´Ù. Á¾·á ¹öÆ°ÀÌ³ª ·Î±×¾Æ¿ôÀ» ´©¸£¼¼¿ä!");
+	                             JOptionPane.showMessageDialog(v, "ëŒ€í™” ë‚´ìš©ì´ ì €ì¥ë˜ì—ˆìŠµë‹ˆë‹¤. ì¢…ë£Œ ë²„íŠ¼ì´ë‚˜ ë¡œê·¸ì•„ì›ƒì„ ëˆ„ë¥´ì„¸ìš”!");
 	                          }
 	                          catch (Exception ee)
 	                          {
@@ -158,19 +158,19 @@ public class MultiChatController implements Runnable {
 		{
 			try
 			{
-				// ¼ÒÄÏ »ı¼º
+				// ì†Œì¼“ ìƒì„±
 				socket = new Socket(ip, 7898);
-				System.out.println("[client]server ¿¬°á ¼º°ø!!");
+				System.out.println("[client]server ì—°ê²° ì„±ê³µ!!");
 				
-				// ÀÔÃâ·Â ½ºÆ®¸² »ı¼º
+				// ì…ì¶œë ¥ ìŠ¤íŠ¸ë¦¼ ìƒì„±
 				inMsg = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				outMsg = new PrintWriter(socket.getOutputStream(), true);
 				
-				//¼­¹ö¿¡ ·Î±×ÀÎ ¸Ş½ÃÁö Àü´Ş
+				//ì„œë²„ì— ë¡œê·¸ì¸ ë©”ì‹œì§€ ì „ë‹¬
 				m = new Message(v.id, v.nickname, "", "login", "");
 				outMsg.println(gson.toJson(m));
 				
-				// ¸Ş½ÃÁö ¼ö½ÅÀ» À§ÇÑ ½º·¹µå »ı¼º
+				// ë©”ì‹œì§€ ìˆ˜ì‹ ì„ ìœ„í•œ ìŠ¤ë ˆë“œ ìƒì„±
 				thread = new Thread(this);
 				thread.start();
 			}
@@ -183,7 +183,7 @@ public class MultiChatController implements Runnable {
 			
 		public void run()
 		{
-			// ¼ö½Å ¸Ş½ÃÁö¸¦ Ã³¸®ÇÏ´Â µ¥ ÇÊ¿äÇÑ º¯¼ö ¼±¾ğ
+			// ìˆ˜ì‹  ë©”ì‹œì§€ë¥¼ ì²˜ë¦¬í•˜ëŠ” ë° í•„ìš”í•œ ë³€ìˆ˜ ì„ ì–¸
 			String msg;
 			status = true;
 			
@@ -191,19 +191,19 @@ public class MultiChatController implements Runnable {
 			{
 				try
 				{
-					// ¸Ş½ÃÁö ¼ö½Å ¹× ÆÄ½Ì
+					// ë©”ì‹œì§€ ìˆ˜ì‹  ë° íŒŒì‹±
 					msg = inMsg.readLine();
 					m = gson.fromJson(msg, Message.class);
 					
-					//MultiChatData °´Ã¼·Î µ¥ÀÌÅÍ °»½Å
+					//MultiChatData ê°ì²´ë¡œ ë°ì´í„° ê°±ì‹ 
 					chatData.refreshData(m.getId() + "   << " + m.getNickname() + ">>" + "  : " + m.getMsg() + "\n");
 					
-					// Ä¿¼­¸¦ ÇöÀç ´ëÈ­ ¸Ş½ÃÁö¿¡ Ç¥Çö
+					// ì»¤ì„œë¥¼ í˜„ì¬ ëŒ€í™” ë©”ì‹œì§€ì— í‘œí˜„
 					v.msgOut.setCaretPosition(v.msgOut.getDocument().getLength());
 				}
 				catch (IOException e)
 				{
-					System.out.println("[MultiChatUI]¸Ş½ÃÁö ½ºÆ®¸² Á¾·á!!");
+					System.out.println("[MultiChatUI]ë©”ì‹œì§€ ìŠ¤íŠ¸ë¦¼ ì¢…ë£Œ!!");
 				}
 			}
 			//logger.info("[CHATUI]"+thread.getName());
@@ -217,4 +217,3 @@ public class MultiChatController implements Runnable {
 		}
 
 }
-	

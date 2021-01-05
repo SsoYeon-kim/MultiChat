@@ -14,47 +14,47 @@ import com.google.gson.Gson;
 public class MultiChat_Server {
 
 	boolean status;
-	// ¼­¹ö ¼ÒÄÏ ¹× Å¬¶óÀÌ¾ğÆ® ¿¬°á ¼ÒÄÏ
+	// ì„œë²„ ì†Œì¼“ ë° í´ë¼ì´ì–¸íŠ¸ ì—°ê²° ì†Œì¼“
 	private ServerSocket ss = null;
 	private Socket s = null;
 	
-	// ¿¬°áµÈ Å¬¶óÀÌ¾ğÆ® ½º·¹µå¸¦ °ü¸®ÇÏ´Â ArrayList
+	// ì—°ê²°ëœ í´ë¼ì´ì–¸íŠ¸ ìŠ¤ë ˆë“œë¥¼ ê´€ë¦¬í•˜ëŠ” ArrayList
 	ArrayList<ChatThread> chatThreads = new ArrayList<ChatThread>();
 	
-	// ·Î°Å °´Ã¼
+	// ë¡œê±° ê°ì²´
 	Logger logger;
 	
-	// ¸ÖÆ¼ Ã¤ÆÃ ¸ŞÀÎ ÇÁ·Î±×·¥ ºÎºĞ
+	// ë©€í‹° ì±„íŒ… ë©”ì¸ í”„ë¡œê·¸ë¨ ë¶€ë¶„
 	public void start()
 	{
 		logger = Logger.getLogger(this.getClass().getName());
 		
 		try
 		{
-			// ¼­¹ö ¼ÒÄÏ »ı¼º
+			// ì„œë²„ ì†Œì¼“ ìƒì„±
 			ss = new ServerSocket(7898);
 			logger.info("MultiChatServer start");
 			
-			// ¹«ÇÑ ·çÇÁ¸¦ µ¹¸é¼­ Å¬¶óÀÌ¾ğÆ® ¿¬°áÀ» ±â´Ù¸°´Ù.
+			// ë¬´í•œ ë£¨í”„ë¥¼ ëŒë©´ì„œ í´ë¼ì´ì–¸íŠ¸ ì—°ê²°ì„ ê¸°ë‹¤ë¦°ë‹¤.
 			while(true)
 			{
 				s = ss.accept();
-				// ¿¬°áµÈ Å¬¶óÀÌ¾ğÆ®¿¡ ´ëÇØ ½º·¹µå Å¬·¡½º »ı¼º
+				// ì—°ê²°ëœ í´ë¼ì´ì–¸íŠ¸ì— ëŒ€í•´ ìŠ¤ë ˆë“œ í´ë˜ìŠ¤ ìƒì„±
 				ChatThread chat = new ChatThread();
-				// Å¬¶óÀÌ¾ğÆ® ¸®½ºÆ® Ãß°¡
+				// í´ë¼ì´ì–¸íŠ¸ ë¦¬ìŠ¤íŠ¸ ì¶”ê°€
 		 		chatThreads.add(chat);         // chatThreads : arrayList
-				// ½º·¹µå ½ÃÀÛ
+				// ìŠ¤ë ˆë“œ ì‹œì‘
 				chat.start();
 			}
 		}
 		catch (Exception e)
 		{
-			logger.info("[MultiChatServer]start() Exception ¹ß»ı!!");
+			logger.info("[MultiChatServer]start() Exception ë°œìƒ!!");
 				e.printStackTrace();
 		}
 	}
 	
-	// ¿¬°áµÈ ¸ğµç Å¬¶óÀÌ¾ğÆ®¿¡ ¸Ş½ÃÁö Áß°è
+	// ì—°ê²°ëœ ëª¨ë“  í´ë¼ì´ì–¸íŠ¸ì— ë©”ì‹œì§€ ì¤‘ê³„
 	void msgSendAll(String msg)          
 	{
 		for(ChatThread ct : chatThreads)
@@ -63,7 +63,7 @@ public class MultiChat_Server {
 		}
 	}
 	
-	// Æ¯Á¤ Å¬¶óÀÌ¾ğÆ®¿¡ ¸Ş½ÃÁö Áß°è
+	// íŠ¹ì • í´ë¼ì´ì–¸íŠ¸ì— ë©”ì‹œì§€ ì¤‘ê³„
 	void msgSendOne(String msg)
 	{
 		
@@ -71,24 +71,24 @@ public class MultiChat_Server {
 	
 	class ChatThread extends Thread
 	{	
-		// ¼ö½Å ¸Ş¼¼Áö ¹× ÆÄ½Ì ¸Ş½ÃÁö Ã³¸®¸¦ À§ÇÑ º¯¼ö ¼±¾ğ
+		// ìˆ˜ì‹  ë©”ì„¸ì§€ ë° íŒŒì‹± ë©”ì‹œì§€ ì²˜ë¦¬ë¥¼ ìœ„í•œ ë³€ìˆ˜ ì„ ì–¸
 		String msg;
 		
-		// ¸Ş½ÃÁö °´Ã¼ »ı¼º
+		// ë©”ì‹œì§€ ê°ì²´ ìƒì„±
 		Message m = new Message();
 		//Message n = new Message();
 		
-		// JSON ÆÄ¼­ ÃÊ±âÈ­
+		// JSON íŒŒì„œ ì´ˆê¸°í™”
 		Gson gson = new Gson();
 		
-		// ÀÔÃâ·Â ½ºÆ®¸²
+		// ì…ì¶œë ¥ ìŠ¤íŠ¸ë¦¼
 		private BufferedReader inMsg = null;
 		private PrintWriter outMsg = null;
 		
 		public void run()
 		{
 			status = true;
-			// »óÅÂ Á¤º¸°¡ trueÀÌ¸é ·çÇÁ¸¦ µ¹¸é¼­ »ç¿ëÀÚ¿¡°Ô¼­ ¼ö½ÅµÈ ¸Ş½ÃÁö Ã³¸®
+			// ìƒíƒœ ì •ë³´ê°€ trueì´ë©´ ë£¨í”„ë¥¼ ëŒë©´ì„œ ì‚¬ìš©ìì—ê²Œì„œ ìˆ˜ì‹ ëœ ë©”ì‹œì§€ ì²˜ë¦¬
 			logger.info("ChatThread start");
 			
 			try
@@ -100,35 +100,35 @@ public class MultiChat_Server {
 				
 				while(status)
 				{
-					// ¼ö½ÅµÈ ¸Ş½ÃÁö¸¦ msg º¯¼ö¿¡ ÀúÀå
+					// ìˆ˜ì‹ ëœ ë©”ì‹œì§€ë¥¼ msg ë³€ìˆ˜ì— ì €ì¥
 					msg = inMsg.readLine();
 					//nickname = innick.readLine();
 					
-					// JSON ¸Ş½ÃÁö¸¦ Message °´Ã¼·Î ¸ÅÇÎ
+					// JSON ë©”ì‹œì§€ë¥¼ Message ê°ì²´ë¡œ ë§¤í•‘
 					m = gson.fromJson(msg, Message.class);
 					
-					// ÆÄ½ÌµÈ ¹®ÀÚ¿­ ¹è¿­ÀÇ µÎ ¹ø¤Š ¿ä¼Ò°ª¿¡ µû¶ó Ã³¸®
-					// ·Î±×¾Æ¿ô ¸Ş½ÃÁöÀÏ ¶§
+					// íŒŒì‹±ëœ ë¬¸ìì—´ ë°°ì—´ì˜ ë‘ ë²ˆÂŠ ìš”ì†Œê°’ì— ë”°ë¼ ì²˜ë¦¬
+					// ë¡œê·¸ì•„ì›ƒ ë©”ì‹œì§€ì¼ ë•Œ
 					if(m.getType().equals("logout"))
 					{
 						chatThreads.remove(this);
-						msgSendAll(gson.toJson(new Message(m.getId(), m.getNickname(), "´ÔÀÌ Á¾·áÇß½À´Ï´Ù.", "sevrer", "")));
-						// ÇØ´ç Å¬¶óÀÌ¾ğÆ® ½º·¹µå Á¾·á·Î status¸¦ false·Î ¼³Á¤       => arraylist¿¡¼­ ÇöÀç chatthread¸¦ Á¦°Å
+						msgSendAll(gson.toJson(new Message(m.getId(), m.getNickname(), "ë‹˜ì´ ì¢…ë£Œí–ˆìŠµë‹ˆë‹¤.", "sevrer", "")));
+						// í•´ë‹¹ í´ë¼ì´ì–¸íŠ¸ ìŠ¤ë ˆë“œ ì¢…ë£Œë¡œ statusë¥¼ falseë¡œ ì„¤ì •       => arraylistì—ì„œ í˜„ì¬ chatthreadë¥¼ ì œê±°
 						status = false;
 					}
-					//·Î±×ÀÎ ¸Ş½ÃÁöÀÏ ¶§
+					//ë¡œê·¸ì¸ ë©”ì‹œì§€ì¼ ë•Œ
 					else if(m.getType().equals("login"))
 					{
-						msgSendAll(gson.toJson(new Message(m.getId(), "´Ğ³×ÀÓ : " + m.getNickname(), "´ÔÀÌ ·Î±×ÀÎÇß½À´Ï´Ù.", "server", "")));
+						msgSendAll(gson.toJson(new Message(m.getId(), "ë‹‰ë„¤ì„ : " + m.getNickname(), "ë‹˜ì´ ë¡œê·¸ì¸í–ˆìŠµë‹ˆë‹¤.", "server", "")));
 					}
 					else
 					{
 						msgSendAll(msg);
 					}
 				}
-				// ·çÇÁ¸¦ ¹ş¾î³ª¸é Å¬¶óÀÌ¾ğÆ® ¿¬°áÀÌ Á¾·áµÇ¹Ç·Î ½º·¹µå ÀÎÅÍ·´Æ®
+				// ë£¨í”„ë¥¼ ë²—ì–´ë‚˜ë©´ í´ë¼ì´ì–¸íŠ¸ ì—°ê²°ì´ ì¢…ë£Œë˜ë¯€ë¡œ ìŠ¤ë ˆë“œ ì¸í„°ëŸ½íŠ¸
 				this.interrupt();
-				logger.info(this.getName() + " Á¾·áµÊ!!");          
+				logger.info(this.getName() + " ì¢…ë£Œë¨!!");          
 			}
 			catch (IOException e) 
 			{

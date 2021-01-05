@@ -1,11 +1,10 @@
-
 public class Message {
 
-	private String id;        // ¾ÆÀÌµğ
-	private String passwd;    // ºñ¹Ğ¹øÈ£
-	private String msg;		  // Ã¤ÆÃ¸Ş½ÃÁö
-	private String type;	  // ¸Ş½ÃÁö À¯Çü(·Î±×ÀÎ, ·Î±×¾Æ¿ô, ¸Ş½ÃÁö Àü´Ş)
-	private String nickname;  // ´Ğ³×ÀÓ
+	private String id;        // ì•„ì´ë””
+	private String passwd;    // ë¹„ë°€ë²ˆí˜¸
+	private String msg;		  // ì±„íŒ…ë©”ì‹œì§€
+	private String type;	  // ë©”ì‹œì§€ ìœ í˜•(ë¡œê·¸ì¸, ë¡œê·¸ì•„ì›ƒ, ë©”ì‹œì§€ ì „ë‹¬)
+	private String nickname;  // ë‹‰ë„¤ì„
 	
 	
 	public Message() 

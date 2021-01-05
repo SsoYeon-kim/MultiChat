@@ -54,29 +54,29 @@ public class Login_GUI extends JFrame {
 		
 		JLabel IdLable = new JLabel("ID");
 	      IdLable.setBounds(98, 302, 79, 31);
-	      IdLable.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 25));
+	      IdLable.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 25));
 	      LoginPanel.add(IdLable);
 	      
 	      JLabel PwdLabel = new JLabel("Pwd");
 	      PwdLabel.setBounds(98, 417, 82, 31);
-	      PwdLabel.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 25));
+	      PwdLabel.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 25));
 	      LoginPanel.add(PwdLabel);
 	      
 	      passwordField = new JPasswordField();
 	      passwordField.setBounds(228, 410, 199, 46);
-	      passwordField.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 20));
+	      passwordField.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 20));
 	      LoginPanel.add(passwordField);
 	      
 	      IdTextField = new JTextField();
 	      IdTextField.setBounds(228, 295, 199, 46);
-	      IdTextField.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 23));
+	      IdTextField.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 23));
 	      IdTextField.setColumns(10);
 	      LoginPanel.add(IdTextField);
 	      
 	      JButton Joinbutton = new JButton("Join");
 	      Joinbutton.setBounds(382, 598, 143, 73);
 	      Joinbutton.setForeground(Color.BLACK);
-	      Joinbutton.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 25));
+	      Joinbutton.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 25));
 	      Joinbutton.setBackground(new Color(216, 191, 216));
 	      LoginPanel.add(Joinbutton);
 	      
@@ -87,28 +87,28 @@ public class Login_GUI extends JFrame {
 	    
 	      JButton Loginbutton = new JButton("Login");
 	      Loginbutton.setForeground(Color.BLACK);
-	      Loginbutton.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 25));
+	      Loginbutton.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 25));
 	      Loginbutton.setBackground(new Color(216, 191, 216));
 	      Loginbutton.setBounds(210, 598, 143, 73);
 	      LoginPanel.add(Loginbutton);
 	      
 	      
 	         JCheckBox B = new JCheckBox("B");
-	         B.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 15));
+	         B.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 15));
 	         B.setBackground(new Color(255, 255, 255));
 	         B.setBounds(10, 709, 39, 27);
 	         LoginPanel.add(B);
 	         bg.add(B);
 	         
 	         JCheckBox G = new JCheckBox("G\r\n");
-	         G.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 15));
+	         G.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 15));
 	         G.setBackground(new Color(255, 255, 255));
 	         G.setBounds(47, 709, 39, 27);
 	         LoginPanel.add(G);
 	         bg.add(G);
 	         
 	         JCheckBox O = new JCheckBox("O");
-	         O.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 15));
+	         O.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 15));
 	         O.setBackground(new Color(255, 255, 255));
 	         O.setBounds(86, 709, 45, 27);
 	         LoginPanel.add(O);
@@ -122,7 +122,7 @@ public class Login_GUI extends JFrame {
 	             
 	        	  if(IdTextField.getText().isEmpty() || passwordField.getText().isEmpty())
 	              {
-	                 JOptionPane.showMessageDialog(contentPane, "¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
+	                 JOptionPane.showMessageDialog(contentPane, "ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
 	              }
 	              else
 	              {
@@ -136,18 +136,18 @@ public class Login_GUI extends JFrame {
 	             		 while((data=id_save_read.readLine()) != null)  
 	             		 {
 	             			 array = data.split("/");
-	             			 if(IdTextField.getText().equals(array[0]))    // ¾ÆÀÌµğ°¡ ÀÖ´Ù!
+	             			 if(IdTextField.getText().equals(array[0]))    // ì•„ì´ë””ê°€ ìˆë‹¤!
 	             				 
 	             			 {
-	             				 if(passwordField.getText().equals(array[1]))  // ºñ¹Ğ¹øÈ£ °°À¸¸é ´İ¾ÆÁÖ°í chatÀÌ ¿­¸°´Ù
+	             				 if(passwordField.getText().equals(array[1]))  // ë¹„ë°€ë²ˆí˜¸ ê°™ìœ¼ë©´ ë‹«ì•„ì£¼ê³  chatì´ ì—´ë¦°ë‹¤
 	             				 {
 	             					 dispose();
 	             					MultiChatController app = new MultiChatController(new MultiChatData(), new Chat_GUI());
 	             					app.appMain();
 	             				 }
-	             				 else                                          // ºñ¹Ğ¹øÈ£°¡ Æ²¸®¸é È®ÀÎÇØ´Ş¶ó
+	             				 else                                          // ë¹„ë°€ë²ˆí˜¸ê°€ í‹€ë¦¬ë©´ í™•ì¸í•´ë‹¬ë¼
 	             				 {
-	             					JOptionPane.showMessageDialog(contentPane, "ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
+	             					JOptionPane.showMessageDialog(contentPane, "ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
 	             				 }
 	             			 }
 	             		 }

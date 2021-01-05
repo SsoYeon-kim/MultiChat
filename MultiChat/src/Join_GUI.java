@@ -53,89 +53,89 @@ public class Join_GUI extends JFrame {
       
        JButton MemberButton_J = new JButton("\uAC00\uC785\uC644\uB8CC");
          MemberButton_J.setBackground(new Color(216, 191, 216));
-         MemberButton_J.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 18));
+         MemberButton_J.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 18));
          MemberButton_J.setBounds(419, 677, 117, 52);
          MemberPanel.add(MemberButton_J);
          
          JLabel label = new JLabel("(\uD544\uC218)");
-         label.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 15));
+         label.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 15));
          label.setBounds(384, 460, 45, 25);
          MemberPanel.add(label);
          
          JLabel Mem_Label = new JLabel("  JOIN US !");
          Mem_Label.setIcon(new ImageIcon(Join_GUI.class.getResource("/people.png")));
          Mem_Label.setBounds(74, 12, 462, 128);
-         Mem_Label.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 50));
+         Mem_Label.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 50));
          MemberPanel.add(Mem_Label);
          
          JLabel IdLabel_J = new JLabel("ID");
          IdLabel_J.setBounds(74, 177, 79, 31);
-         IdLabel_J.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 23));
+         IdLabel_J.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 23));
          MemberPanel.add(IdLabel_J);
          
          JLabel PwdLabel_J = new JLabel("Pwd");
          PwdLabel_J.setBounds(74, 267, 82, 31);
-         PwdLabel_J.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 23));
+         PwdLabel_J.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 23));
          MemberPanel.add(PwdLabel_J);
          
          JLabel Pwd1Label_J = new JLabel("Pwd \uD655\uC778");
          Pwd1Label_J.setBounds(71, 361, 127, 40);
-         Pwd1Label_J.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 23));
+         Pwd1Label_J.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 23));
          MemberPanel.add(Pwd1Label_J);
          
          JLabel AgeLabel_J = new JLabel("Age");
          AgeLabel_J.setBounds(74, 452, 72, 33);
-         AgeLabel_J.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 23));
+         AgeLabel_J.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 23));
          MemberPanel.add(AgeLabel_J);
          
          JLabel NumberLabel_J = new JLabel("Phone_Num");
          NumberLabel_J.setBounds(74, 532, 148, 34);
-         NumberLabel_J.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 23));
+         NumberLabel_J.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 23));
          MemberPanel.add(NumberLabel_J);
          
          JLabel SNSLabel_J = new JLabel(" (\uC120\uD0DD)    SNS \uB3D9\uC758");
          SNSLabel_J.setBounds(91, 605, 167, 34);
-         SNSLabel_J.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 18));
+         SNSLabel_J.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 18));
          MemberPanel.add(SNSLabel_J);
          
          JCheckBox WCheckBox = new JCheckBox("\uC5EC");
          //buttonGroup_1.add(WCheckBox);
          WCheckBox.setBounds(442, 455, 52, 27);
          WCheckBox.setBackground(new Color(230, 230, 250));
-         WCheckBox.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.PLAIN, 15));
+         WCheckBox.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.PLAIN, 15));
          MemberPanel.add(WCheckBox);
          
          JCheckBox MCheckBox_1 = new JCheckBox("\uB0A8");
         // buttonGroup_1.add(MCheckBox_1);
          MCheckBox_1.setBounds(503, 455, 52, 27);
          MCheckBox_1.setBackground(new Color(230, 230, 250));
-         MCheckBox_1.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.PLAIN, 15));
+         MCheckBox_1.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.PLAIN, 15));
          MemberPanel.add(MCheckBox_1);
          
          IdText_J = new JTextField();
          IdText_J.setBounds(231, 173, 127, 40);
-         IdText_J.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 20));
+         IdText_J.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 20));
          IdText_J.setColumns(10);
          MemberPanel.add(IdText_J);
          
          passwordField_J = new JPasswordField();
          passwordField_J.setBounds(231, 264, 199, 40);
-         passwordField_J.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 20));
+         passwordField_J.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 20));
          MemberPanel.add(passwordField_J);
          
          passwordField1_J = new JPasswordField();
-         passwordField1_J.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 20));
+         passwordField1_J.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 20));
          passwordField1_J.setBounds(231, 361, 199, 39);
          MemberPanel.add(passwordField1_J);
          
          NumField_2 = new JTextField();
-         NumField_2.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 15));
+         NumField_2.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 15));
          NumField_2.setBounds(440, 532, 84, 36);
          MemberPanel.add(NumField_2);
          NumField_2.setColumns(10);
          
          JComboBox comboBox_Age = new JComboBox();
-         comboBox_Age.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.PLAIN, 15));
+         comboBox_Age.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.PLAIN, 15));
          comboBox_Age.setForeground(new Color(0, 0, 0));
          comboBox_Age.setBackground(new Color(255, 255, 255));
          comboBox_Age.setBounds(231, 452, 93, 32);
@@ -164,14 +164,14 @@ public class Join_GUI extends JFrame {
          MemberPanel.add(NumLineLabel_1);
          
          NumField_1 = new JTextField();
-         NumField_1.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 15));
+         NumField_1.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 15));
          NumField_1.setBounds(332, 530, 79, 36);
          MemberPanel.add(NumField_1);
          NumField_1.setColumns(10);
          
          JComboBox comboBox_Num = new JComboBox();
          comboBox_Num.setBackground(new Color(255, 255, 255));
-         comboBox_Num.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.PLAIN, 15));
+         comboBox_Num.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.PLAIN, 15));
          comboBox_Num.setModel(new DefaultComboBoxModel(new String[] {"010", "011", "016", "017", "018", "019"}));
          comboBox_Num.setBounds(236, 532, 72, 33);
          
@@ -184,25 +184,25 @@ public class Join_GUI extends JFrame {
          
          JCheckBox SnsCheckBox = new JCheckBox(" YES");
          //buttonGroup.add(SnsCheckBox);
-         SnsCheckBox.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 15));
+         SnsCheckBox.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 15));
          SnsCheckBox.setBackground(new Color(230, 230, 250));
          SnsCheckBox.setBounds(286, 612, 72, 27);
          MemberPanel.add(SnsCheckBox);
          
          JCheckBox SnsCheckBox_1 = new JCheckBox(" NO");
          //buttonGroup.add(SnsCheckBox_1);
-         SnsCheckBox_1.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 15));
+         SnsCheckBox_1.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 15));
          SnsCheckBox_1.setBackground(new Color(230, 230, 250));
          SnsCheckBox_1.setBounds(379, 611, 79, 27);
          MemberPanel.add(SnsCheckBox_1);
          
          JButton Idcheckbutton = new JButton("\uC911\uBCF5\uD655\uC778");
-         Idcheckbutton.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.BOLD, 19));
+         Idcheckbutton.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.BOLD, 19));
          Idcheckbutton.setBounds(431, 173, 111, 40);
          MemberPanel.add(Idcheckbutton);
          
          JLabel idcheck_label = new JLabel("\u203B \uD31D\uC5C5\uCC3D\uC774 \uC548\uB728\uBA74 \uC0AC\uC6A9\uAC00\uB2A5!");
-         idcheck_label.setFont(new Font("ÇÔÃÊ·Òµ¸¿ò", Font.PLAIN, 15));
+         idcheck_label.setFont(new Font("í•¨ì´ˆë¡¬ë‹ì›€", Font.PLAIN, 15));
          idcheck_label.setBounds(365, 216, 203, 21);
          MemberPanel.add(idcheck_label);
          
@@ -214,13 +214,13 @@ public class Join_GUI extends JFrame {
                    
                 if((IdText_J.getText().isEmpty() || passwordField_J.getText().isEmpty()))
                 {
-                   JOptionPane.showMessageDialog(contentPane, "¾ÆÀÌµğ¿Í ºñ¹Ğ¹øÈ£¸¦ È®ÀÎÇØÁÖ¼¼¿ä.");
+                   JOptionPane.showMessageDialog(contentPane, "ì•„ì´ë””ì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ í™•ì¸í•´ì£¼ì„¸ìš”.");
                 }
                 else
                 {  
                     if(!(passwordField_J.getText().equals(passwordField1_J.getText())))
                           {
-                             JOptionPane.showMessageDialog(contentPane, "ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇØÁÖ¼¼¿ä");
+                             JOptionPane.showMessageDialog(contentPane, "ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•´ì£¼ì„¸ìš”");
                           }
                     else
                     {
@@ -233,7 +233,7 @@ public class Join_GUI extends JFrame {
                              id_save.write(passwordField_J.getText() + "/");
                              id_save.write(NumField_1.getText() + "-" + NumField_2.getText() +"/" + "\r\n");
                              id_save.close();
-                             JOptionPane.showMessageDialog(contentPane, "È¯¿µÇÕ´Ï´Ù!");
+                             JOptionPane.showMessageDialog(contentPane, "í™˜ì˜í•©ë‹ˆë‹¤!");
                           }
                           catch (Exception ee)
                           {
@@ -252,7 +252,7 @@ public class Join_GUI extends JFrame {
                              id_save.write(passwordField_J.getText() + "/");
                              id_save.write(NumField_1.getText() + "-" + NumField_2.getText()+"/" + "\r\n");
                              id_save.close();
-                             JOptionPane.showMessageDialog(contentPane, "È¯¿µÇÕ´Ï´Ù!");
+                             JOptionPane.showMessageDialog(contentPane, "í™˜ì˜í•©ë‹ˆë‹¤!");
                           }
                           catch (Exception ew)
                           {
@@ -270,7 +270,7 @@ public class Join_GUI extends JFrame {
                     
              });
          
-         Idcheckbutton.addActionListener(new ActionListener() {       //>>>>>>>>>>>>>>>Áßº¹È®ÀÎ
+         Idcheckbutton.addActionListener(new ActionListener() {       //>>>>>>>>>>>>>>>ì¤‘ë³µí™•ì¸
              @Override
              public void actionPerformed(ActionEvent arg0) {
               
@@ -284,7 +284,7 @@ public class Join_GUI extends JFrame {
                            array = data.split("/");
                            if(IdText_J.getText().equals(array[0]))
                            {
-                              JOptionPane.showMessageDialog(contentPane, "ÀÌ¹Ì Á¸ÀçÇÏ´Â ID ÀÔ´Ï´Ù.");
+                              JOptionPane.showMessageDialog(contentPane, "ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ID ì…ë‹ˆë‹¤.");
                            }
                         }
                         
