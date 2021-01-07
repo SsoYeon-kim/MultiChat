@@ -39,7 +39,7 @@ public class Join_GUI extends JFrame {
    
    public Join_GUI() {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      setBounds(100, 100, 600, 800);
+      setBounds(100, 100, 606, 650);
       contentPane = new JPanel();
       contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
       contentPane.setLayout(new BorderLayout(0, 0));
@@ -54,83 +54,83 @@ public class Join_GUI extends JFrame {
        JButton MemberButton_J = new JButton("\uAC00\uC785\uC644\uB8CC");
          MemberButton_J.setBackground(new Color(216, 191, 216));
          MemberButton_J.setFont(new Font("함초롬돋움", Font.BOLD, 18));
-         MemberButton_J.setBounds(419, 677, 117, 52);
+         MemberButton_J.setBounds(441, 517, 117, 52);
          MemberPanel.add(MemberButton_J);
          
          JLabel label = new JLabel("(\uD544\uC218)");
          label.setFont(new Font("함초롬돋움", Font.BOLD, 15));
-         label.setBounds(384, 460, 45, 25);
+         label.setBounds(387, 354, 45, 25);
          MemberPanel.add(label);
          
          JLabel Mem_Label = new JLabel("  JOIN US !");
          Mem_Label.setIcon(new ImageIcon(Join_GUI.class.getResource("/people.png")));
-         Mem_Label.setBounds(74, 12, 462, 128);
+         Mem_Label.setBounds(77, 0, 462, 128);
          Mem_Label.setFont(new Font("함초롬돋움", Font.BOLD, 50));
          MemberPanel.add(Mem_Label);
          
          JLabel IdLabel_J = new JLabel("ID");
-         IdLabel_J.setBounds(74, 177, 79, 31);
+         IdLabel_J.setBounds(77, 140, 79, 31);
          IdLabel_J.setFont(new Font("함초롬돋움", Font.BOLD, 23));
          MemberPanel.add(IdLabel_J);
          
          JLabel PwdLabel_J = new JLabel("Pwd");
-         PwdLabel_J.setBounds(74, 267, 82, 31);
+         PwdLabel_J.setBounds(76, 218, 82, 31);
          PwdLabel_J.setFont(new Font("함초롬돋움", Font.BOLD, 23));
          MemberPanel.add(PwdLabel_J);
          
          JLabel Pwd1Label_J = new JLabel("Pwd \uD655\uC778");
-         Pwd1Label_J.setBounds(71, 361, 127, 40);
+         Pwd1Label_J.setBounds(73, 270, 127, 40);
          Pwd1Label_J.setFont(new Font("함초롬돋움", Font.BOLD, 23));
          MemberPanel.add(Pwd1Label_J);
          
          JLabel AgeLabel_J = new JLabel("Age");
-         AgeLabel_J.setBounds(74, 452, 72, 33);
+         AgeLabel_J.setBounds(77, 346, 72, 33);
          AgeLabel_J.setFont(new Font("함초롬돋움", Font.BOLD, 23));
          MemberPanel.add(AgeLabel_J);
          
          JLabel NumberLabel_J = new JLabel("Phone_Num");
-         NumberLabel_J.setBounds(74, 532, 148, 34);
+         NumberLabel_J.setBounds(77, 396, 148, 34);
          NumberLabel_J.setFont(new Font("함초롬돋움", Font.BOLD, 23));
          MemberPanel.add(NumberLabel_J);
          
          JLabel SNSLabel_J = new JLabel(" (\uC120\uD0DD)    SNS \uB3D9\uC758");
-         SNSLabel_J.setBounds(91, 605, 167, 34);
+         SNSLabel_J.setBounds(113, 445, 167, 34);
          SNSLabel_J.setFont(new Font("함초롬돋움", Font.BOLD, 18));
          MemberPanel.add(SNSLabel_J);
          
          JCheckBox WCheckBox = new JCheckBox("\uC5EC");
          //buttonGroup_1.add(WCheckBox);
-         WCheckBox.setBounds(442, 455, 52, 27);
+         WCheckBox.setBounds(445, 349, 52, 27);
          WCheckBox.setBackground(new Color(230, 230, 250));
          WCheckBox.setFont(new Font("함초롬돋움", Font.PLAIN, 15));
          MemberPanel.add(WCheckBox);
          
          JCheckBox MCheckBox_1 = new JCheckBox("\uB0A8");
         // buttonGroup_1.add(MCheckBox_1);
-         MCheckBox_1.setBounds(503, 455, 52, 27);
+         MCheckBox_1.setBounds(506, 349, 52, 27);
          MCheckBox_1.setBackground(new Color(230, 230, 250));
          MCheckBox_1.setFont(new Font("함초롬돋움", Font.PLAIN, 15));
          MemberPanel.add(MCheckBox_1);
          
          IdText_J = new JTextField();
-         IdText_J.setBounds(231, 173, 127, 40);
+         IdText_J.setBounds(234, 136, 127, 40);
          IdText_J.setFont(new Font("함초롬돋움", Font.BOLD, 20));
          IdText_J.setColumns(10);
          MemberPanel.add(IdText_J);
          
          passwordField_J = new JPasswordField();
-         passwordField_J.setBounds(231, 264, 199, 40);
+         passwordField_J.setBounds(233, 215, 199, 40);
          passwordField_J.setFont(new Font("함초롬돋움", Font.BOLD, 20));
          MemberPanel.add(passwordField_J);
          
          passwordField1_J = new JPasswordField();
          passwordField1_J.setFont(new Font("함초롬돋움", Font.BOLD, 20));
-         passwordField1_J.setBounds(231, 361, 199, 39);
+         passwordField1_J.setBounds(233, 270, 199, 39);
          MemberPanel.add(passwordField1_J);
          
          NumField_2 = new JTextField();
          NumField_2.setFont(new Font("함초롬돋움", Font.BOLD, 15));
-         NumField_2.setBounds(440, 532, 84, 36);
+         NumField_2.setBounds(443, 396, 84, 36);
          MemberPanel.add(NumField_2);
          NumField_2.setColumns(10);
          
@@ -138,7 +138,7 @@ public class Join_GUI extends JFrame {
          comboBox_Age.setFont(new Font("함초롬돋움", Font.PLAIN, 15));
          comboBox_Age.setForeground(new Color(0, 0, 0));
          comboBox_Age.setBackground(new Color(255, 255, 255));
-         comboBox_Age.setBounds(231, 452, 93, 32);
+         comboBox_Age.setBounds(234, 346, 93, 32);
          comboBox_Age.addItem("19");
          comboBox_Age.addItem("20");
          comboBox_Age.addItem("21");
@@ -160,12 +160,12 @@ public class Join_GUI extends JFrame {
          MemberPanel.add(comboBox_Age);
          
          JLabel NumLineLabel_1 = new JLabel("-");
-         NumLineLabel_1.setBounds(419, 540, 17, 18);
+         NumLineLabel_1.setBounds(422, 404, 17, 18);
          MemberPanel.add(NumLineLabel_1);
          
          NumField_1 = new JTextField();
          NumField_1.setFont(new Font("함초롬돋움", Font.BOLD, 15));
-         NumField_1.setBounds(332, 530, 79, 36);
+         NumField_1.setBounds(335, 394, 79, 36);
          MemberPanel.add(NumField_1);
          NumField_1.setColumns(10);
          
@@ -173,37 +173,37 @@ public class Join_GUI extends JFrame {
          comboBox_Num.setBackground(new Color(255, 255, 255));
          comboBox_Num.setFont(new Font("함초롬돋움", Font.PLAIN, 15));
          comboBox_Num.setModel(new DefaultComboBoxModel(new String[] {"010", "011", "016", "017", "018", "019"}));
-         comboBox_Num.setBounds(236, 532, 72, 33);
+         comboBox_Num.setBounds(239, 396, 72, 33);
          
          comboBox_Num.setSelectedItem(null);
          MemberPanel.add(comboBox_Num);
          
          JLabel NumLineLabel_2 = new JLabel("-");
-         NumLineLabel_2.setBounds(316, 539, 36, 18);
+         NumLineLabel_2.setBounds(319, 403, 36, 18);
          MemberPanel.add(NumLineLabel_2);
          
          JCheckBox SnsCheckBox = new JCheckBox(" YES");
          //buttonGroup.add(SnsCheckBox);
          SnsCheckBox.setFont(new Font("함초롬돋움", Font.BOLD, 15));
          SnsCheckBox.setBackground(new Color(230, 230, 250));
-         SnsCheckBox.setBounds(286, 612, 72, 27);
+         SnsCheckBox.setBounds(308, 452, 72, 27);
          MemberPanel.add(SnsCheckBox);
          
          JCheckBox SnsCheckBox_1 = new JCheckBox(" NO");
          //buttonGroup.add(SnsCheckBox_1);
          SnsCheckBox_1.setFont(new Font("함초롬돋움", Font.BOLD, 15));
          SnsCheckBox_1.setBackground(new Color(230, 230, 250));
-         SnsCheckBox_1.setBounds(379, 611, 79, 27);
+         SnsCheckBox_1.setBounds(401, 451, 79, 27);
          MemberPanel.add(SnsCheckBox_1);
          
          JButton Idcheckbutton = new JButton("\uC911\uBCF5\uD655\uC778");
          Idcheckbutton.setFont(new Font("함초롬돋움", Font.BOLD, 19));
-         Idcheckbutton.setBounds(431, 173, 111, 40);
+         Idcheckbutton.setBounds(434, 136, 111, 40);
          MemberPanel.add(Idcheckbutton);
          
          JLabel idcheck_label = new JLabel("\u203B \uD31D\uC5C5\uCC3D\uC774 \uC548\uB728\uBA74 \uC0AC\uC6A9\uAC00\uB2A5!");
          idcheck_label.setFont(new Font("함초롬돋움", Font.PLAIN, 15));
-         idcheck_label.setBounds(365, 216, 203, 21);
+         idcheck_label.setBounds(368, 179, 203, 21);
          MemberPanel.add(idcheck_label);
          
          setVisible(true);

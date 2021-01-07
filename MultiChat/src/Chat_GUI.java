@@ -153,7 +153,7 @@ public class Chat_GUI extends JFrame  {
          cardLayout.show(tab, "login");
          
          pack();
-         setSize(600,800);
+         setSize(600,600);
          setVisible(true);
    }
    

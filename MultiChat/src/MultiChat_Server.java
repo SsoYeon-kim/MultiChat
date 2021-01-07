@@ -107,7 +107,7 @@ public class MultiChat_Server {
 					// JSON 메시지를 Message 객체로 매핑
 					m = gson.fromJson(msg, Message.class);
 					
-					// 파싱된 문자열 배열의 두 번 요소값에 따라 처리
+					// Message클래스 생성자 확인
 					// 로그아웃 메시지일 때
 					if(m.getType().equals("logout"))
 					{
