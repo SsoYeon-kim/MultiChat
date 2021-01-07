@@ -63,14 +63,10 @@ public class MultiChat_Server {
 		}
 	}
 	
-	// 특정 클라이언트에 메시지 중계
-	void msgSendOne(String msg)
-	{
-		
-	}
 	
 	class ChatThread extends Thread
 	{	
+		
 		// 수신 메세지 및 파싱 메시지 처리를 위한 변수 선언
 		String msg;
 		
@@ -102,7 +98,6 @@ public class MultiChat_Server {
 				{
 					// 수신된 메시지를 msg 변수에 저장
 					msg = inMsg.readLine();
-					//nickname = innick.readLine();
 					
 					// JSON 메시지를 Message 객체로 매핑
 					m = gson.fromJson(msg, Message.class);
@@ -112,14 +107,30 @@ public class MultiChat_Server {
 					if(m.getType().equals("logout"))
 					{
 						chatThreads.remove(this);
-						msgSendAll(gson.toJson(new Message(m.getNickname(), "님이 종료했습니다.", "sevrer")));
+						msgSendAll(gson.toJson(new Message(m.getNickname(),"", "님이 종료했습니다.", "logout")));
 						// 해당 클라이언트 스레드 종료로 status를 false로 설정       => arraylist에서 현재 chatthread를 제거
 						status = false;
 					}
 					//로그인 메시지일 때
 					else if(m.getType().equals("login"))
 					{
-						msgSendAll(gson.toJson(new Message("닉네임 : " + m.getNickname(), "님이 로그인했습니다.", "server")));
+						//현재 스레드 이름을 입장한 닉네임 이름으로 설정
+						Thread.currentThread().setName(m.getNickname());
+						String threadName = Thread.currentThread().getName();
+						System.out.println(threadName);
+						
+						msgSendAll(gson.toJson(new Message(m.getNickname(),"" ,"님이 로그인했습니다.", "login")));
+						
+					}
+					//귓속말 메시지일 때
+					else if(m.getType().equals("secret"))
+					{	
+						for (ChatThread ct : chatThreads) {
+                            if (ct.getName().equals(m.getSecretReceiver())) {
+                                ct.outMsg.println(gson.toJson(new Message(m.getNickname() + "님의 귓속말", "", m.getMsg(), "secret")));
+                            }
+                        }
+
 					}
 					else
 					{

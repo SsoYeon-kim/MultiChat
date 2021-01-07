@@ -20,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.SystemColor;
+import javax.swing.JRadioButton;
 
 public class Chat_GUI extends JFrame  {
 
@@ -35,6 +37,9 @@ public class Chat_GUI extends JFrame  {
    // 닉네임 입력 텍스트 필드
    protected JTextField nick_input;
    
+   // 귓속말 상대 입력 텍스트 필드
+   protected JTextField recieverInput;
+   
    // 로그아웃 패널
    private JPanel logoutPanel;
    // 로그아웃 버튼
@@ -44,7 +49,9 @@ public class Chat_GUI extends JFrame  {
    private JPanel msgPanel;
    // 메시지 입력 텍스트필드
    protected JTextField msgInput;
-   // 종료 버튼
+
+   //귓속말 패널
+   private JPanel panel;
    
 
    // 화면 구성 전환을 위한 카드 레이아웃
@@ -55,7 +62,9 @@ public class Chat_GUI extends JFrame  {
    protected JTextArea msgOut;
              
    protected String nickname;
+   protected String secretReciever;
    protected JButton saveButton;
+   protected JButton secretButton;
      
 
    // 생성자
@@ -70,7 +79,7 @@ public class Chat_GUI extends JFrame  {
          
          // 로그인 패널 레이아웃 설정
          loginPanel.setLayout(new FlowLayout());
-         loginButton = new JButton("로그인");
+         loginButton = new JButton("입장");
          loginButton.setBackground(new Color(216, 191, 216));
          loginButton.setFont(new Font("함초롬돋움", Font.BOLD, 16));
          nick_input = new JTextField(15);
@@ -96,15 +105,11 @@ public class Chat_GUI extends JFrame  {
          
          // 메시지 입력 패널 구성
          msgPanel = new JPanel();
-         // 메시지 입력 테스트필드
-         msgPanel.setLayout(new BorderLayout());
          msgInput = new JTextField(30);
          msgInput.setBackground(new Color(255, 255, 255));
-         saveButton = new JButton("저장");
-         saveButton.setBackground(new Color(216, 191, 216));
+         msgPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
          
-         msgPanel.add(msgInput, BorderLayout.WEST);
-         msgPanel.add(saveButton, BorderLayout.EAST);
+         msgPanel.add(msgInput);
          
             // 로그인/로그아웃 패널 중 하나를 선택하는 CardLayout 패널
             tab = new JPanel();
@@ -126,11 +131,25 @@ public class Chat_GUI extends JFrame  {
          jsp.setBackground(new Color(221, 160, 221));
          getContentPane().add(tab, BorderLayout.NORTH);
          getContentPane().add(jsp, BorderLayout.CENTER);
+         
+         panel = new JPanel();
+         jsp.setColumnHeaderView(panel);
+         
+         recieverInput = new JTextField();
+         panel.add(recieverInput);
+         recieverInput.setColumns(10);
+         secretButton = new JButton("귓속말");
+         secretButton.setBackground(new Color(240, 248, 255));
+         secretButton.setFont(new Font("함초롬돋움", Font.BOLD, 16));
+         panel.add(secretButton);
          getContentPane().add(msgPanel, BorderLayout.SOUTH);
+         saveButton = new JButton("저장");
+         saveButton.setBackground(new Color(216, 191, 216));
+         msgPanel.add(saveButton);
          cardLayout.show(tab, "login");
          
          pack();
-         setSize(400,600);
+         setSize(450,600);
          setVisible(true);
    }
    
@@ -141,7 +160,7 @@ public class Chat_GUI extends JFrame  {
       logoutButton.addActionListener(listener);
       msgInput.addActionListener(listener);
       saveButton.addActionListener(listener);
-      
+      secretButton.addActionListener(listener);
    }
 
 }

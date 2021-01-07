@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
@@ -32,6 +33,7 @@ public class MultiChatController implements Runnable {
 	private Socket socket;
 	private BufferedReader inMsg = null;
 	private PrintWriter outMsg = null;
+
 	Gson gson = new Gson();
 	
 	MultiChat_Server mc;
@@ -48,7 +50,6 @@ public class MultiChatController implements Runnable {
 	String path = "C:/MultiChatInfo/msgSave";
 	
 	File Folder = new File(path);
-	File savefile = new File(path);
 	
 	// 뷰 클래스 참조 객체
 	private final Chat_GUI v;
@@ -78,8 +79,7 @@ public class MultiChatController implements Runnable {
 						
 					if(obj == v.loginButton)
 					{
-						v.nickname = v.nick_input.getText();						
-							
+						v.nickname = v.nick_input.getText();		
 						v.outLabel.setText(" 닉네임 : " + v.nickname);
 						v.cardLayout.show(v.tab, "logout");
 						connectServer();
@@ -87,7 +87,7 @@ public class MultiChatController implements Runnable {
 					else if(obj == v.logoutButton)
 					{
 						// 로그아웃 메시지 전송
-						outMsg.println(gson.toJson(new Message(v.nickname, "", "logout")));
+						outMsg.println(gson.toJson(new Message(v.nickname,"","","logout")));
 						// 대화 창 클리어
 						v.msgOut.setText("");
 						// 로그인 UI로 전환
@@ -109,9 +109,21 @@ public class MultiChatController implements Runnable {
 					else if(obj == v.msgInput)
 					{
 						// 메시지 전송
-						outMsg.println(gson.toJson(new Message(v.nickname, v.msgInput.getText(), "msg")));
+						outMsg.println(gson.toJson(new Message(v.nickname, "", v.msgInput.getText(), "msg")));
 						// 입력 창 클리어
 						v.msgInput.setText("");
+					}
+					else if(obj == v.secretButton) 
+					{
+						v.secretReciever = v.recieverInput.getText();	
+						
+						if(v.msgInput.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(v, "대화를 입력한 후 누르세요.");
+						}
+						else {
+							outMsg.println(gson.toJson(new Message(v.nickname, v.secretReciever, v.msgInput.getText(), "secret")));
+						}
+						
 					}
 					else if(obj == v.saveButton)
 					{
@@ -129,12 +141,15 @@ public class MultiChatController implements Runnable {
 						
 						//대화내용 저장
 						try {	
-								File newFile = new File(path + File.separator + v.nickname + "님의 대화저장.txt");
+								SimpleDateFormat dataformat = new SimpleDateFormat ( "yyyy년 MM월 dd일 HH시 mm분 ss초");
+								String time = dataformat.format (System.currentTimeMillis());
 								
-	                            BufferedWriter msg_save = new BufferedWriter(new FileWriter(newFile, true));  
-	                            msg_save.write(v.msgOut.getText());
+								File saveFile = new File(path + File.separator + v.nickname + "님의 대화저장.txt");
+								
+	                            BufferedWriter msg_save = new BufferedWriter(new FileWriter(saveFile, true));  
+	                            msg_save.write(v.msgOut.getText() + "\n[" + time + " 저장]\n\n"  );
 	                            msg_save.close();
-	                            JOptionPane.showMessageDialog(v, "대화 내용이 저장되었습니다");
+	                            JOptionPane.showMessageDialog(v, "대화 내용이 저장되었습니다.");
 	                          }catch (Exception ee)
 	                          {
 	                             ee.printStackTrace();
@@ -159,7 +174,7 @@ public class MultiChatController implements Runnable {
 			outMsg = new PrintWriter(socket.getOutputStream(), true);
 				
 			//서버에 로그인 메시지 전달
-			m = new Message(v.nickname, "", "login");
+			m = new Message(v.nickname, "","", "login");
 			outMsg.println(gson.toJson(m));
 				
 			// 메시지 수신을 위한 스레드 생성
@@ -185,7 +200,17 @@ public class MultiChatController implements Runnable {
 				m = gson.fromJson(msg, Message.class);
 					
 				//MultiChatData 객체로 데이터 갱신
-				chatData.refreshData("   [ " + m.getNickname() + "]" + "  : " + m.getMsg() + "\n");
+				if(m.getMsg()!=null) {
+					if(m.getType().equals("login") || m.getType().equals("logout")) {
+						chatData.refreshData("  ▶  " + m.getNickname() + m.getMsg() + "\n");
+					}
+					else if(m.getType().equals("secret")) {
+						chatData.refreshData("  << " + m.getNickname() + ">>" + m.getMsg() + "\n");
+					}
+					else {
+						chatData.refreshData("  [ " + m.getNickname() + "]" + "  : " + m.getMsg() + "\n");
+					}
+				}
 					
 				// 커서를 현재 대화 메시지에 표현
 				v.msgOut.setCaretPosition(v.msgOut.getDocument().getLength());
