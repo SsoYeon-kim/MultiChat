@@ -45,7 +45,10 @@ public class MultiChatController implements Runnable {
 	
 	Logger logger;
 	
-	File savefile = new File("C:/Member/msgsave.txt");
+	String path = "C:/MultiChatInfo/msgSave";
+	
+	File Folder = new File(path);
+	File savefile = new File(path);
 	
 	// 뷰 클래스 참조 객체
 	private final Chat_GUI v;
@@ -75,29 +78,22 @@ public class MultiChatController implements Runnable {
 						
 					if(obj == v.loginButton)
 					{
-						v.id = v.idInput.getText();
 						v.nickname = v.nick_input.getText();						
 							
-						v.outLabel.setText(" 이름: " + v.id + "     닉네임 : " + v.nickname);
+						v.outLabel.setText(" 닉네임 : " + v.nickname);
 						v.cardLayout.show(v.tab, "logout");
 						connectServer();
 					}
 					else if(obj == v.logoutButton)
 					{
 						// 로그아웃 메시지 전송
-						outMsg.println(gson.toJson(new Message(v.id, v.nickname, "", "logout", "")));
+						outMsg.println(gson.toJson(new Message(v.nickname, "", "logout")));
 						// 대화 창 클리어
 						v.msgOut.setText("");
-						// 로그인 패널로 전환
-						v.cardLayout.show(v.tab, "login");
-						try { 
-	                            BufferedWriter msg_save = new BufferedWriter(new FileWriter(savefile, true));  
-	                            msg_save.write("\r\n" + "다른 접속자 저장 : " + "\r" );
-	                             
-	                            msg_save.close();
-	                         }catch (Exception ee){
-	                             ee.printStackTrace();
-	                          }
+						// 로그인 UI로 전환
+						v.dispose();
+						Login_GUI loginUI = new Login_GUI();
+						
 							
 						outMsg.close();
 						
@@ -113,34 +109,37 @@ public class MultiChatController implements Runnable {
 					else if(obj == v.msgInput)
 					{
 						// 메시지 전송
-						outMsg.println(gson.toJson(new Message("", v.nickname, v.msgInput.getText(), "msg", "")));
+						outMsg.println(gson.toJson(new Message(v.nickname, v.msgInput.getText(), "msg")));
 						// 입력 창 클리어
 						v.msgInput.setText("");
 					}
-					else if(obj == v.exitButton)
-					{
-						try { 
-	                            BufferedWriter msg_save = new BufferedWriter(new FileWriter(savefile, true));  
-	                            msg_save.write("\r\n" + "다른 접속자 저장 : " + "\r" );
-	                             
-	                            msg_save.close();
-	                         }catch (Exception ee){
-	                             ee.printStackTrace();
-	                          }
-						
-						System.exit(0);
-					}
 					else if(obj == v.saveButton)
 					{
-							try {	                             
-	                             BufferedWriter msg_save = new BufferedWriter(new FileWriter(savefile, true));  
-	                             msg_save.write(v.msgOut.getText());
-	                             msg_save.close();
-	                             JOptionPane.showMessageDialog(v, "대화 내용이 저장되었습니다. 종료 버튼이나 로그아웃을 누르세요!");
+						//msgSave폴더 생성
+						if (!Folder.exists()) {
+							try{
+							    	Folder.mkdir(); 
+						        } catch(Exception eee){
+							    eee.getStackTrace();
+							}
+							
+					    }else {
+							System.out.println("이미 폴더가 생성되어 있습니다.");
+						}
+						
+						//대화내용 저장
+						try {	
+								File newFile = new File(path + File.separator + v.nickname + "님의 대화저장.txt");
+								
+	                            BufferedWriter msg_save = new BufferedWriter(new FileWriter(newFile, true));  
+	                            msg_save.write(v.msgOut.getText());
+	                            msg_save.close();
+	                            JOptionPane.showMessageDialog(v, "대화 내용이 저장되었습니다");
 	                          }catch (Exception ee)
 	                          {
 	                             ee.printStackTrace();
 	                          }
+						
 					}
 				}
 			});
@@ -160,7 +159,7 @@ public class MultiChatController implements Runnable {
 			outMsg = new PrintWriter(socket.getOutputStream(), true);
 				
 			//서버에 로그인 메시지 전달
-			m = new Message(v.id, v.nickname, "", "login", "");
+			m = new Message(v.nickname, "", "login");
 			outMsg.println(gson.toJson(m));
 				
 			// 메시지 수신을 위한 스레드 생성
@@ -186,7 +185,7 @@ public class MultiChatController implements Runnable {
 				m = gson.fromJson(msg, Message.class);
 					
 				//MultiChatData 객체로 데이터 갱신
-				chatData.refreshData(m.getId() + "   << " + m.getNickname() + ">>" + "  : " + m.getMsg() + "\n");
+				chatData.refreshData("   [ " + m.getNickname() + "]" + "  : " + m.getMsg() + "\n");
 					
 				// 커서를 현재 대화 메시지에 표현
 				v.msgOut.setCaretPosition(v.msgOut.getDocument().getLength());

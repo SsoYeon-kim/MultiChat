@@ -112,14 +112,14 @@ public class MultiChat_Server {
 					if(m.getType().equals("logout"))
 					{
 						chatThreads.remove(this);
-						msgSendAll(gson.toJson(new Message(m.getId(), m.getNickname(), "님이 종료했습니다.", "sevrer", "")));
+						msgSendAll(gson.toJson(new Message(m.getNickname(), "님이 종료했습니다.", "sevrer")));
 						// 해당 클라이언트 스레드 종료로 status를 false로 설정       => arraylist에서 현재 chatthread를 제거
 						status = false;
 					}
 					//로그인 메시지일 때
 					else if(m.getType().equals("login"))
 					{
-						msgSendAll(gson.toJson(new Message(m.getId(), "닉네임 : " + m.getNickname(), "님이 로그인했습니다.", "server", "")));
+						msgSendAll(gson.toJson(new Message("닉네임 : " + m.getNickname(), "님이 로그인했습니다.", "server")));
 					}
 					else
 					{

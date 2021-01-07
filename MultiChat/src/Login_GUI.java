@@ -37,7 +37,7 @@ public class Login_GUI extends JFrame {
 	protected JPanel LoginPanel;
 	protected JLabel ChatLabel;
 	
-	File file = new File("C:/Member/member.txt");
+	File file = new File("C:/MultiChatInfo/member.txt");
 	
 	public Login_GUI() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -1,7 +1,6 @@
 public class Message {
 
-	private String id;        // 아이디
-	private String passwd;    // 비밀번호
+	//private String passwd;    // 비밀번호
 	private String msg;		  // 채팅메시지
 	private String type;	  // 메시지 유형(로그인, 로그아웃, 메시지 전달)
 	private String nickname;  // 닉네임
@@ -12,31 +11,22 @@ public class Message {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Message(String id, String nickname, String msg ,String type, String passwd) 
+	public Message(String nickname, String msg ,String type) 
 	{
-		this.id = id;
 		this.nickname = nickname;
 		this.msg =msg;
 		this.type = type;
-		this.passwd = passwd;
 	}
 
-	public String getId()
-	{
-		return id;
-	}
-	public void setId(String id)
-	{
-		this.id = id;
-	}
-	public String getPasswd()
-	{
-		return passwd;
-	}
-	public void setPasswd(String passwd)
-	{
-		this.passwd = passwd;
-	}
+	
+//	public String getPasswd()
+//	{
+//		return passwd;
+//	}
+//	public void setPasswd(String passwd)
+//	{
+//		this.passwd = passwd;
+//	}
 	public String getMsg()
 	{
 		return msg;

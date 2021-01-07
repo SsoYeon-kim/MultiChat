@@ -34,7 +34,11 @@ public class Join_GUI extends JFrame {
    private JPasswordField passwordField1_J;
    private JTextField NumField_2;
    private Container buttonGroup;
-   File file = new File("C:/Member/member.txt");
+   
+   String path = "C:/MultiChatInfo";
+	
+   File Folder = new File(path);
+   File file = new File(path + File.separator + "member.txt");
    
    
    public Join_GUI() {
@@ -225,39 +229,65 @@ public class Join_GUI extends JFrame {
                     else
                     {
                        if(WCheckBox.isSelected() == true)
-                         {
-                          try {
+                       {
+                    	   	//msgSave폴더 생성
+   							if (!Folder.exists()) {
+   								try{
+   							    		Folder.mkdir(); 
+   						        	} catch(Exception eee){
+   						        		eee.getStackTrace();
+   						        	}
+   							
+   							}else {
+   								System.out.println("이미 폴더가 생성되어 있습니다.");
+   							}
+   						
+   							//회원가입정보 저장
+   							try {
                              
-                             BufferedWriter id_save = new BufferedWriter(new FileWriter(file, true));  
-                             id_save.write(IdText_J.getText() + "/");
-                             id_save.write(passwordField_J.getText() + "/");
-                             id_save.write(NumField_1.getText() + "-" + NumField_2.getText() +"/" + "\r\n");
-                             id_save.close();
-                             JOptionPane.showMessageDialog(contentPane, "환영합니다!");
-                          }
-                          catch (Exception ee)
-                          {
-                             ee.printStackTrace();
-                          }
+   								BufferedWriter id_save = new BufferedWriter(new FileWriter(file, true));  
+   								id_save.write(IdText_J.getText() + "/");
+   								id_save.write(passwordField_J.getText() + "/");
+   								id_save.write(NumField_1.getText() + "-" + NumField_2.getText() +"/" + "\r\n");
+   								id_save.close();
+   								JOptionPane.showMessageDialog(contentPane, "환영합니다!");
+   							}
+   							catch (Exception ee)
+   							{
+   								ee.printStackTrace();
+   							}
                           
                             dispose();
                             Login_GUI login_gui = new Login_GUI();
-                         }
+                        }
                        if(MCheckBox_1.isSelected() == true)
                        {
-                          try {
+                    	   	//msgSave폴더 생성
+  							if (!Folder.exists()) {
+  								try{
+  							    		Folder.mkdir(); 
+  						        	} catch(Exception eee){
+  						        		eee.getStackTrace();
+  						        	}
+  							
+  							}else {
+  								System.out.println("이미 폴더가 생성되어 있습니다.");
+  							}
+  						
+  							//회원가입정보 저장
+  							try {
                              
-                             BufferedWriter id_save = new BufferedWriter(new FileWriter(file, true)); 
-                             id_save.write(IdText_J.getText() + "/");
-                             id_save.write(passwordField_J.getText() + "/");
-                             id_save.write(NumField_1.getText() + "-" + NumField_2.getText()+"/" + "\r\n");
-                             id_save.close();
-                             JOptionPane.showMessageDialog(contentPane, "환영합니다!");
-                          }
-                          catch (Exception ew)
-                          {
-                             ew.printStackTrace();
-                          }
+  								BufferedWriter id_save = new BufferedWriter(new FileWriter(file, true)); 
+  								id_save.write(IdText_J.getText() + "/");
+  								id_save.write(passwordField_J.getText() + "/");
+  								id_save.write(NumField_1.getText() + "-" + NumField_2.getText()+"/" + "\r\n");
+  								id_save.close();
+  								JOptionPane.showMessageDialog(contentPane, "환영합니다!");
+                         	}
+	                          catch (Exception ew)
+	                          {
+	                        	  ew.printStackTrace();
+	                          }
                           
                           dispose();
                           Login_GUI login_gui = new Login_GUI();
