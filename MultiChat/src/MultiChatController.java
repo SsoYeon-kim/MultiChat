@@ -28,7 +28,7 @@ import javax.swing.JPanel;
 import com.google.gson.Gson;
 
 public class MultiChatController implements Runnable {
-	
+	 
 	private String ip = "127.0.0.1";
 	private Socket socket;
 	private BufferedReader inMsg = null;
