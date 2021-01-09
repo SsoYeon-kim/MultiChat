@@ -300,7 +300,8 @@ public class Join_GUI extends JFrame {
                     
              });
          
-         Idcheckbutton.addActionListener(new ActionListener() {       //>>>>>>>>>>>>>>>중복확인
+         //아이디 중복 확인
+         Idcheckbutton.addActionListener(new ActionListener() {      
              @Override
              public void actionPerformed(ActionEvent arg0) {
               
@@ -309,6 +310,7 @@ public class Join_GUI extends JFrame {
                         String data;
                         String[] array;
                         BufferedReader id_save_read = new BufferedReader(new FileReader(file));  
+                        
                         while((data=id_save_read.readLine()) != null)  
                         {
                            array = data.split("/");

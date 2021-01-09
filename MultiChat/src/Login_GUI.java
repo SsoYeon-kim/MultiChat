@@ -136,7 +136,9 @@ public class Login_GUI extends JFrame {
 	             		 while((data=id_save_read.readLine()) != null)  
 	             		 {
 	             			 array = data.split("/");
-	             			 if(IdTextField.getText().equals(array[0]))    // 아이디가 있다!
+	             			 
+	             			 //이미 존재하는 아이디일 경우
+	             			 if(IdTextField.getText().equals(array[0]))    // 아이디가 이미 존재함
 	             				 
 	             			 {
 	             				 if(passwordField.getText().equals(array[1]))  // 비밀번호 같으면 닫아주고 chat이 열린다
@@ -161,6 +163,7 @@ public class Login_GUI extends JFrame {
 	           }  
 	       });
 	      
+	      //회원가입 버튼
 	      Joinbutton.addActionListener(new ActionListener() {
 	          @Override
 	          public void actionPerformed(ActionEvent arg0) {
@@ -169,6 +172,7 @@ public class Login_GUI extends JFrame {
 	          }   
 	       });
 	      
+	      //배경색 바꾸는 버튼
 	      B.addActionListener(new ActionListener() {
 	             @Override
 	             public void actionPerformed(ActionEvent arg0) {

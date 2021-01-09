@@ -132,6 +132,7 @@ public class MultiChat_Server {
                         }
 
 					}
+					//전체 메시지일 때
 					else
 					{
 						msgSendAll(msg);

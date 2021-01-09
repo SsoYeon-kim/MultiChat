@@ -77,6 +77,7 @@ public class MultiChatController implements Runnable {
 				{
 					Object obj = e.getSource();
 						
+					//로그인버튼
 					if(obj == v.loginButton)
 					{
 						v.nickname = v.nick_input.getText();		
@@ -84,6 +85,7 @@ public class MultiChatController implements Runnable {
 						v.cardLayout.show(v.tab, "logout");
 						connectServer();
 					}
+					//로그아웃 버튼
 					else if(obj == v.logoutButton)
 					{
 						// 로그아웃 메시지 전송
@@ -103,9 +105,10 @@ public class MultiChatController implements Runnable {
 							}catch (IOException ex){
 								ex.printStackTrace();
 							}
-						
+						//소켓 연결 끊기
 						status = false;
 					}
+					//메세지 입력
 					else if(obj == v.msgInput)
 					{
 						// 메시지 전송
@@ -113,6 +116,7 @@ public class MultiChatController implements Runnable {
 						// 입력 창 클리어
 						v.msgInput.setText("");
 					}
+					//귓속말 버튼
 					else if(obj == v.secretButton) 
 					{
 						v.secretReciever = v.recieverInput.getText();	
@@ -125,6 +129,7 @@ public class MultiChatController implements Runnable {
 						}
 						
 					}
+					//저장 버튼
 					else if(obj == v.saveButton)
 					{
 						//msgSave폴더 생성
@@ -201,12 +206,15 @@ public class MultiChatController implements Runnable {
 					
 				//MultiChatData 객체로 데이터 갱신
 				if(m.getMsg()!=null) {
+					//로그인, 로그아웃
 					if(m.getType().equals("login") || m.getType().equals("logout")) {
 						chatData.refreshData("  ▶  " + m.getNickname() + m.getMsg() + "\n");
 					}
+					//귓속말채팅
 					else if(m.getType().equals("secret")) {
 						chatData.refreshData("  << " + m.getNickname() + ">>" + m.getMsg() + "\n");
 					}
+					//채팅
 					else {
 						chatData.refreshData("  [ " + m.getNickname() + "]" + "  : " + m.getMsg() + "\n");
 					}
