@@ -26,6 +26,7 @@
 #### [컨트롤러] - C   
 4-1. 서버 연결   
 4-2. 데이터 처리   
+4-3. run 
 
 <hr>
 
@@ -614,6 +615,9 @@ View에 해당하는 Chat_GUI.java에서 위임한 동적인 요소를 처리하
 다음은 appMain함수의 코드이다.   
 
 <pre><code>
+
+```
+
 // 데이터 객체에서 데이터 변화를 처리할 UI 객체 추가       
 	public void appMain()        
 		{
@@ -713,4 +717,65 @@ View에 해당하는 Chat_GUI.java에서 위임한 동적인 요소를 처리하
 			});
 				
 		}
+```
+
 </code></pre>
+
+MultiChatData.java의 함수 addObj에 채팅이 출력되는 JTextArea인 msgOut를 등록한 후 각 컴포넌트에 대한 이벤트 처리를 한다.   
+저장 버튼을 누르게 되면 채팅내용을 저장할 폴더를 생성하고 폴더 안에 저장 버튼을 누른 사용자의 닉네임으로 .txt파일이 저장된다. 동일한 사용자가 저장 버튼을 다시 누르게 되면 같은 파일에 저장되지만 이를 구분하기 위해 저장 버튼을 누를 때 해당하는 년 / 월 / 일 / 시 / 분 / 초를 포함하여 구분할 수 있게 했다.   
+
+### run 함수
+
+MultiChat_Server.java에서 Thread 클래스를 상속받았기 때문에 자바는 다중 상속을 지원하지 않으므로 Runnable 인터페이스를 구현하는 방법으로 하였다.   
+다음은 run 함수의 코드이다.   
+
+<pre><code>
+
+```
+
+public void run()
+	{
+		// 수신 메시지를 처리하는 데 필요한 변수 선언
+		String msg;
+		status = true;
+		
+		while(true)
+		{
+			try
+			{
+				// 메시지 수신 및 파싱
+				msg = inMsg.readLine();
+				m = gson.fromJson(msg, Message.class);
+					
+				//MultiChatData 객체로 데이터 갱신
+				if(m.getMsg()!=null) {
+					//로그인, 로그아웃
+					if(m.getType().equals("login") || m.getType().equals("logout")) {
+						chatData.refreshData("  ▶  " + m.getNickname() + m.getMsg() + "\n");
+					}
+					//귓속말채팅
+					else if(m.getType().equals("secret")) {
+						chatData.refreshData("  << " + m.getNickname() + ">>" + m.getMsg() + "\n");
+					}
+					//채팅
+					else {
+						chatData.refreshData("  [ " + m.getNickname() + "]" + "  : " + m.getMsg() + "\n");
+					}
+				}
+					
+				// 커서를 현재 대화 메시지에 표현
+				v.msgOut.setCaretPosition(v.msgOut.getDocument().getLength());
+			}catch (IOException e)
+				{
+					System.out.println("[MultiChatUI]메시지 스트림 종료!!");
+				}
+		}
+		//logger.info("[CHATUI]"+thread.getName());
+	}
+```
+
+</code></pre>
+
+MultiChatData.java의 함수인 refreshData를 이용하여 메시지 규격에 맞춰 UI데이터를 업데이트 해준다.   
+로그인, 로그아웃 / 귓속말 채팅 / 전체 채팅 의 경우로 나누어 출력의 형태를 다르게 설정하였다.   
+
