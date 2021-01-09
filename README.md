@@ -762,7 +762,7 @@ public void run()
 					}
 					//귓속말채팅
 					else if(m.getType().equals("secret")) {
-						chatData.refreshData("  << " + m.getNickname() + ">>" + m.getMsg() + "\n");
+						chatData.refreshData("  << " + m.getNickname() + ">>" + "  : " + m.getMsg() + "\n");
 					}
 					//채팅
 					else {
