@@ -194,6 +194,6 @@ public class Login_GUI extends JFrame {
 	             }   
 	          });
 	        
-		
+		 
 	}
 }
