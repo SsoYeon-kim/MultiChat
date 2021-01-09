@@ -381,7 +381,7 @@ UI의 구성은 생략하고 각 컴포너늩들의 이벤트 처리 부분만 �
 
 회원가입을 통하여 사용자가 작성한 아이디, 비밀번호 등을 .txt 파일로 저장하였으며 로그인 창에서 파일을 읽어 존재하는 회원이 맞는지 확인하는 과정이 포함된다.   
 
-<img src= "https://user-images.githubusercontent.com/62587484/104087310-33abaa80-52a2-11eb-9baa-f8e44bec1117.PNG"><img src= "https://user-images.githubusercontent.com/62587484/104087350-81c0ae00-52a2-11eb-9878-f0c0259a36aa.PNG"><img src= "https://user-images.githubusercontent.com/62587484/104087369-90a76080-52a2-11eb-9b37-af188c24f1a7.PNG"><img src= "https://user-images.githubusercontent.com/62587484/104087391-a0bf4000-52a2-11eb-82aa-ee26712bf583.PNG">
+<img src= "https://user-images.githubusercontent.com/62587484/104087310-33abaa80-52a2-11eb-9baa-f8e44bec1117.PNG" width=60%><img src= "https://user-images.githubusercontent.com/62587484/104087350-81c0ae00-52a2-11eb-9878-f0c0259a36aa.PNG"><img src= "https://user-images.githubusercontent.com/62587484/104087369-90a76080-52a2-11eb-9b37-af188c24f1a7.PNG"><img src= "https://user-images.githubusercontent.com/62587484/104087391-a0bf4000-52a2-11eb-82aa-ee26712bf583.PNG">
 
 
 
