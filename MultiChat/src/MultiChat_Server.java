@@ -125,6 +125,7 @@ public class MultiChat_Server {
 					//귓속말 메시지일 때
 					else if(m.getType().equals("secret"))
 					{	
+						//귓속말 상대한테만 메시지 전달
 						for (ChatThread ct : chatThreads) {
                             if (ct.getName().equals(m.getSecretReceiver())) {
                                 ct.outMsg.println(gson.toJson(new Message(m.getNickname() + "님의 귓속말", "", m.getMsg(), "secret")));
