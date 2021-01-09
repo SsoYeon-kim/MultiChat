@@ -21,7 +21,7 @@
 #### [UI] - V   
 3-1. 로그인   
 3-2. 회원가입   
-3-3. 채팅   
+3-3. 채팅 - V   
  
 #### [컨트롤러] - C   
 4-1. 서버 연결   
@@ -286,8 +286,16 @@ View는 화면에 보이는 영역을 담당한다.
 UI의 구성은 생략하고 각 컴포너늩들의 이벤트 처리 부분만 보여준다.   
 
 <pre><code>
-
-Loginbutton.addActionListener(new ActionListener() {
+	
+	```
+	
+        File file = new File("C:/MultiChatInfo/member.txt");
+	
+	public Login_GUI() {
+	
+	```
+	      
+	      Loginbutton.addActionListener(new ActionListener() {
 	          @Override
 	          public void actionPerformed(ActionEvent arg0) {
 	             
@@ -364,6 +372,345 @@ Loginbutton.addActionListener(new ActionListener() {
 	                LoginPanel.setBackground(new Color(255, 228, 196));
 	             }   
 	          });
+	        
+		 
+	}
+
 </code></pre>
 
-## [C]ontroller 클라이언트
+회원가입을 통하여 사용자가 작성한 아이디, 비밀번호 등을 .txt 파일로 저장하였으며 로그인 창에서 파일을 읽어 존재하는 회원이 맞는지 확인하는 과정이 포함된다.   
+
+### 회원가입
+
+다음은 Join_GUI.java의 코드이다.   
+위와 마찬가지로 구성은 제외하고 컴포넌트의 이벤트만 보여준다.   
+
+<pre><code>
+
+	```
+   String path = "C:/MultiChatInfo";
+	
+   File Folder = new File(path);
+   File file = new File(path + File.separator + "member.txt");
+   
+   public Join_GUI() {
+   
+      ```
+         
+         MemberButton_J.addActionListener(new ActionListener() {
+             @Override
+              public void actionPerformed(ActionEvent e) {
+                   
+                if((IdText_J.getText().isEmpty() || passwordField_J.getText().isEmpty()))
+                {
+                   JOptionPane.showMessageDialog(contentPane, "아이디와 비밀번호를 확인해주세요.");
+                }
+                else
+                {  
+                    if(!(passwordField_J.getText().equals(passwordField1_J.getText())))
+                          {
+                             JOptionPane.showMessageDialog(contentPane, "비밀번호가 다릅니다. 다시 입력해주세요");
+                          }
+                    else
+                    {
+                       if(WCheckBox.isSelected() == true)
+                       {
+                    	   	//msgSave폴더 생성
+   							if (!Folder.exists()) {
+   								try{
+   							    		Folder.mkdir(); 
+   						        	} catch(Exception eee){
+   						        		eee.getStackTrace();
+   						        	}
+   							
+   							}else {
+   								System.out.println("이미 폴더가 생성되어 있습니다.");
+   							}
+   						
+   							//회원가입정보 저장
+   							try {
+                             
+   								BufferedWriter id_save = new BufferedWriter(new FileWriter(file, true));  
+   								id_save.write(IdText_J.getText() + "/");
+   								id_save.write(passwordField_J.getText() + "/");
+   								id_save.write(NumField_1.getText() + "-" + NumField_2.getText() +"/" + "\r\n");
+   								id_save.close();
+   								JOptionPane.showMessageDialog(contentPane, "환영합니다!");
+   							}
+   							catch (Exception ee)
+   							{
+   								ee.printStackTrace();
+   							}
+                          
+                            dispose();
+                            Login_GUI login_gui = new Login_GUI();
+                        }
+                       if(MCheckBox_1.isSelected() == true)
+                       {
+                    	   	//msgSave폴더 생성
+  							if (!Folder.exists()) {
+  								try{
+  							    		Folder.mkdir(); 
+  						        	} catch(Exception eee){
+  						        		eee.getStackTrace();
+  						        	}
+  							
+  							}else {
+  								System.out.println("이미 폴더가 생성되어 있습니다.");
+  							}
+  						
+  							//회원가입정보 저장
+  							try {
+                             
+  								BufferedWriter id_save = new BufferedWriter(new FileWriter(file, true)); 
+  								id_save.write(IdText_J.getText() + "/");
+  								id_save.write(passwordField_J.getText() + "/");
+  								id_save.write(NumField_1.getText() + "-" + NumField_2.getText()+"/" + "\r\n");
+  								id_save.close();
+  								JOptionPane.showMessageDialog(contentPane, "환영합니다!");
+                         	}
+	                          catch (Exception ew)
+	                          {
+	                        	  ew.printStackTrace();
+	                          }
+                          
+                          dispose();
+                          Login_GUI login_gui = new Login_GUI();
+                        
+                       }
+                    }
+                }
+             
+              }
+                    
+             });
+         
+         //아이디 중복 확인
+         Idcheckbutton.addActionListener(new ActionListener() {      
+             @Override
+             public void actionPerformed(ActionEvent arg0) {
+              
+              {
+                 try {
+                        String data;
+                        String[] array;
+                        BufferedReader id_save_read = new BufferedReader(new FileReader(file));  
+                        
+                        while((data=id_save_read.readLine()) != null)  
+                        {
+                           array = data.split("/");
+                           if(IdText_J.getText().equals(array[0]))
+                           {
+                              JOptionPane.showMessageDialog(contentPane, "이미 존재하는 ID 입니다.");
+                           }
+                        }
+                        
+                  }
+                  catch (Exception e)
+                  {
+                     e.printStackTrace();
+                  }
+              }
+             }
+         });
+                
+   }
+</code></pre>
+
+사용자가 회원가입에서 입력한 정보를 저장할 폴더를 생성하고 폴더 안에 Member.txt를 만들어 "/"로 구분하여 정보를 저장하게 된다.   
+아이디를 만들 때 Member.txt를 불러와 이미 존재하는 아이디인지 중복확인을 하게 된다.   
+
+### 채팅 - V
+
+채팅UI는 MVC패턴 구조 중 V에 속한다. 이는 Chat_GUI.java에 해당한다.   
+다음은 Chat_GUI.java의 코드이다.
+
+<pre><code>
+public Chat_GUI()
+   {
+      // 메인 프레임 구성
+      super("::멀티챗::");
+         
+            ```
+   
+   public void addButtonActionListener(ActionListener listener)
+   {
+      // 이벤트 리스너 등록
+      loginButton.addActionListener(listener);
+      logoutButton.addActionListener(listener);
+      msgInput.addActionListener(listener);
+      saveButton.addActionListener(listener);
+      secretButton.addActionListener(listener);
+   }
+
+</code></pre>
+
+앞선 Login_GUI.java와 Join_GUI.java와는 다르게 클래스 내부에서 해당하는 컴포넌트의 이벤트를 처리하지 않고 Controller에서 처리하도록 하였다.   
+각 컴포넌트에 해당하는 이벤트는 다음으로 설명할 컨트롤러에서 보도록 한다.
+
+## [C]ontroller 
+
+컨트롤러는 MultiChatController.java에 해당한다.   
+
+<pre><code>
+```
+
+	// 뷰 클래스 참조 객체
+	private final Chat_GUI v;
+	// 데이터 클래스 참조 객체
+	private final MultiChatData chatData;
+	
+public MultiChatController(MultiChatData chatData, Chat_GUI v)
+		{
+			// 로거 객체 초기화
+			logger = Logger.getLogger(this.getClass().getName());
+			
+			// 모델과 뷰 클래스 참조
+			this.chatData = chatData;
+			this.v = v;
+		}
+		
+```
+
+</code></pre>
+
+우선 MultiChatController 클래스는 Chat_GUI와 MultiChatData를 생성하고 참조하기 때문에 위와 같은 코드를 추가한다.   
+
+### 서버 연결 
+
+아래의 코드는 서버와 연결하는 connectServer함수의 코드이다.   
+
+<pre><code>
+public void connectServer()
+	{
+		try
+		{
+			// 소켓 생성
+			socket = new Socket(ip, 7898);
+			System.out.println("[client]server 연결 성공!!");
+				
+			// 입출력 스트림 생성
+			inMsg = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			outMsg = new PrintWriter(socket.getOutputStream(), true);
+				
+			//서버에 로그인 메시지 전달
+			m = new Message(v.nickname, "","", "login");
+			outMsg.println(gson.toJson(m));
+				
+			// 메시지 수신을 위한 스레드 생성
+			thread = new Thread(this);
+			thread.start();
+		}catch (Exception e){
+				e.printStackTrace();
+			}
+	}
+</code></pre>
+
+소켓을 생성하고 서버에 로그인 메시지를 전달한다. Message.java에 정의한 메시지 규격인 nickname, secretReceiver, msg, type에 맞춰 전달하게 되고 이때 type을 login으로 하여 서버에서 type에 맞는 처리를 하도록 한다.   
+
+### 데이터 처리 
+
+View에 해당하는 Chat_GUI.java에서 위임한 동적인 요소를 처리하게 된다.   
+다음은 appMain함수의 코드이다.   
+
+<pre><code>
+// 데이터 객체에서 데이터 변화를 처리할 UI 객체 추가       
+	public void appMain()        
+		{
+			chatData.addObj(v.msgOut);
+			
+			v.addButtonActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e)
+				{
+					Object obj = e.getSource();
+						
+					//로그인버튼
+					if(obj == v.loginButton)
+					{
+						v.nickname = v.nick_input.getText();		
+						v.outLabel.setText(" 닉네임 : " + v.nickname);
+						v.cardLayout.show(v.tab, "logout");
+						connectServer();
+					}
+					//로그아웃 버튼
+					else if(obj == v.logoutButton)
+					{
+						// 로그아웃 메시지 전송
+						outMsg.println(gson.toJson(new Message(v.nickname,"","","logout")));
+						// 대화 창 클리어
+						v.msgOut.setText("");
+						// 로그인 UI로 전환
+						v.dispose();
+						Login_GUI loginUI = new Login_GUI();
+						
+							
+						outMsg.close();
+						
+						try{
+								inMsg.close();
+								socket.close();
+							}catch (IOException ex){
+								ex.printStackTrace();
+							}
+						//소켓 연결 끊기
+						status = false;
+					}
+					//메세지 입력
+					else if(obj == v.msgInput)
+					{
+						// 메시지 전송
+						outMsg.println(gson.toJson(new Message(v.nickname, "", v.msgInput.getText(), "msg")));
+						// 입력 창 클리어
+						v.msgInput.setText("");
+					}
+					//귓속말 버튼
+					else if(obj == v.secretButton) 
+					{
+						v.secretReciever = v.recieverInput.getText();	
+						
+						if(v.msgInput.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(v, "대화를 입력한 후 누르세요.");
+						}
+						else {
+							outMsg.println(gson.toJson(new Message(v.nickname, v.secretReciever, v.msgInput.getText(), "secret")));
+						}
+						
+					}
+					//저장 버튼
+					else if(obj == v.saveButton)
+					{
+						//msgSave폴더 생성
+						if (!Folder.exists()) {
+							try{
+							    	Folder.mkdir(); 
+						        } catch(Exception eee){
+							    eee.getStackTrace();
+							}
+							
+					    }else {
+							System.out.println("이미 폴더가 생성되어 있습니다.");
+						}
+						
+						//대화내용 저장
+						try {	
+								SimpleDateFormat dataformat = new SimpleDateFormat ( "yyyy년 MM월 dd일 HH시 mm분 ss초");
+								String time = dataformat.format (System.currentTimeMillis());
+								
+								File saveFile = new File(path + File.separator + v.nickname + "님의 대화저장.txt");
+								
+	                            BufferedWriter msg_save = new BufferedWriter(new FileWriter(saveFile, true));  
+	                            msg_save.write(v.msgOut.getText() + "\n[" + time + " 저장]\n\n"  );
+	                            msg_save.close();
+	                            JOptionPane.showMessageDialog(v, "대화 내용이 저장되었습니다.");
+	                          }catch (Exception ee)
+	                          {
+	                             ee.printStackTrace();
+	                          }
+						
+					}
+				}
+			});
+				
+		}
+</code></pre>
