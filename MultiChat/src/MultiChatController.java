@@ -40,14 +40,11 @@ public class MultiChatController implements Runnable {
 
 	Gson gson = new Gson();
 	
-	MultiChat_Server mc;
-	
 	Message m;
 	
 	Thread thread;
-	boolean status;
 	
-	static Chat_GUI mcui;
+	boolean status;
 	
 	Logger logger;
 	
