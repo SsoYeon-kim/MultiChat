@@ -1,3 +1,4 @@
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -8,6 +9,9 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Logger;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 import com.google.gson.Gson;
 
@@ -133,8 +137,13 @@ public class MultiChat_Server {
                         }
 
 					}
+					//이모티콘 메시지일 때
+					else if(m.getType().equals("img"))
+					{
+						msgSendAll(msg);
+					}
 					//전체 메시지일 때
-					else
+					else if(m.getType().equals("msg"))
 					{
 						msgSendAll(msg);
 					}

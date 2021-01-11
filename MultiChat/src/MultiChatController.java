@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Frame;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -10,9 +11,12 @@ import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.text.SimpleDateFormat;
@@ -48,7 +52,7 @@ public class MultiChatController implements Runnable {
 	Logger logger;
 	
 	String path = "C:/MultiChatInfo/msgSave";
-	
+
 	File Folder = new File(path);
 	
 	// 뷰 클래스 참조 객체
@@ -111,6 +115,9 @@ public class MultiChatController implements Runnable {
 					//메세지 입력
 					else if(obj == v.msgInput)
 					{
+						if(v.msgInput.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(v, "대화를 입력하세요.");
+						}
 						// 메시지 전송
 						outMsg.println(gson.toJson(new Message(v.nickname, "", v.msgInput.getText(), "msg")));
 						// 입력 창 클리어
@@ -121,11 +128,15 @@ public class MultiChatController implements Runnable {
 					{
 						v.secretReciever = v.recieverInput.getText();	
 						
-						if(v.msgInput.getText().isEmpty()) {
+						if(v.secretReciever.isEmpty()) {
+							JOptionPane.showMessageDialog(v, "귓속말 상대의 닉네임을 입력해주세요.");
+						}
+						else if(v.msgInput.getText().isEmpty()) {
 							JOptionPane.showMessageDialog(v, "대화를 입력한 후 누르세요.");
 						}
 						else {
 							outMsg.println(gson.toJson(new Message(v.nickname, v.secretReciever, v.msgInput.getText(), "secret")));
+							v.msgInput.setText("");
 						}
 						
 					}
@@ -146,7 +157,7 @@ public class MultiChatController implements Runnable {
 						
 						//대화내용 저장
 						try {	
-								SimpleDateFormat dataformat = new SimpleDateFormat ( "yyyy년 MM월 dd일 HH시 mm분 ss초");
+								SimpleDateFormat dataformat = new SimpleDateFormat ("yyyy년 MM월 dd일 HH시 mm분 ss초");
 								String time = dataformat.format (System.currentTimeMillis());
 								
 								File saveFile = new File(path + File.separator + v.nickname + "님의 대화저장.txt");
@@ -160,6 +171,24 @@ public class MultiChatController implements Runnable {
 	                             ee.printStackTrace();
 	                          }
 						
+					}
+					else if(obj == v.imageButton) {
+						v.imagePanel.setVisible(true);
+					}
+					else if(obj == v.im_Love_Button) {
+						// 메시지 전송
+						outMsg.println(gson.toJson(new Message(v.nickname, "", "(하트)", "img")));
+						v.imagePanel.setVisible(false);
+					}
+					else if(obj == v.im_Angry_Button) {
+						// 메시지 전송
+						outMsg.println(gson.toJson(new Message(v.nickname, "", "(화남)", "img")));
+						v.imagePanel.setVisible(false);
+					}
+					else if(obj == v.im_Good_Button) {
+						// 메시지 전송
+						outMsg.println(gson.toJson(new Message(v.nickname, "", "(따봉)", "img")));
+						v.imagePanel.setVisible(false);
 					}
 				}
 			});
@@ -215,13 +244,18 @@ public class MultiChatController implements Runnable {
 						chatData.refreshData("  << " + m.getNickname() + ">>" + "  : " + m.getMsg() + "\n");
 					}
 					//채팅
-					else {
+					else if(m.getType().equals("msg")) {
 						chatData.refreshData("  [ " + m.getNickname() + "]" + "  : " + m.getMsg() + "\n");
 					}
+					//이모티콘
+					else {
+						chatData.refreshData("  < " + m.getNickname() + "  님이 보낸  " + m.getMsg() + "이모티콘 \n");
+					}
 				}
-					
+				
 				// 커서를 현재 대화 메시지에 표현
 				v.msgOut.setCaretPosition(v.msgOut.getDocument().getLength());
+				
 			}catch (IOException e)
 				{
 					System.out.println("[MultiChatUI]메시지 스트림 종료!!");
