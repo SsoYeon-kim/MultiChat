@@ -638,6 +638,19 @@ public Chat_GUI()
 아래의 코드는 서버와 연결하는 connectServer함수의 코드이다.   
 
 <pre><code>
+	private String ip = "127.0.0.1";
+	private Socket socket;
+	private BufferedReader inMsg = null;
+	private PrintWriter outMsg = null;
+
+	Gson gson = new Gson();
+	
+	Message m;
+	
+	Thread thread;
+	
+	boolean status;
+	
 	```
 	
 public void connectServer()
@@ -675,7 +688,10 @@ View에 해당하는 Chat_GUI.java에서 위임한 동적인 요소를 처리하
 다음은 appMain함수의 코드이다.   
 
 <pre><code>
+	String path = "C:/MultiChatInfo/msgSave";
 
+	File Folder = new File(path);
+	
 	```
 
 	// 데이터 객체에서 데이터 변화를 처리할 UI 객체 추가       
