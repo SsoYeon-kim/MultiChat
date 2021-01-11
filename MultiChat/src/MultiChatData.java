@@ -37,11 +37,12 @@ public class MultiChatData {
 		this.msgOut = (JTextPane)comp;
 	}
 	
-	//UI데이터(채팅)를 업데이트
+	//UI데이터(채팅,이모티콘)를 업데이트
 	void refreshData(String msg) 
 	{
 		StyledDocument doc = msgOut.getStyledDocument();
 		
+		//하트 이모티콘
 		if (msg.contains("(하트)")) {
 			try {
 				doc.insertString(doc.getLength(),msg, null);
@@ -54,6 +55,7 @@ public class MultiChatData {
 			msgOut.insertComponent(new JLabel(Heart_icon));
 			
 		}
+		//화남 이모티콘
 		else if(msg.contains("(화남)")) {
 			
 			try {
@@ -67,6 +69,7 @@ public class MultiChatData {
 			msgOut.insertComponent(new JLabel(Angry_icon));
 			
 		}
+		//따봉 이모티콘
 		else if(msg.contains("(따봉)")) {
 			
 			try {
@@ -80,6 +83,7 @@ public class MultiChatData {
 			msgOut.insertComponent(new JLabel(Good_icon));
 			
 		}
+		//채팅
 		else {
 			try {
 				doc.insertString(doc.getLength(), msg, null);

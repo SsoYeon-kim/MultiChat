@@ -172,19 +172,23 @@ public class MultiChatController implements Runnable {
 	                          }
 						
 					}
+					//이모티콘 버튼
 					else if(obj == v.imageButton) {
 						v.imagePanel.setVisible(true);
 					}
+					//하트 이모티콘 버튼
 					else if(obj == v.im_Love_Button) {
 						// 메시지 전송
 						outMsg.println(gson.toJson(new Message(v.nickname, "", "(하트)", "img")));
 						v.imagePanel.setVisible(false);
 					}
+					//화남 이모티콘 버튼
 					else if(obj == v.im_Angry_Button) {
 						// 메시지 전송
 						outMsg.println(gson.toJson(new Message(v.nickname, "", "(화남)", "img")));
 						v.imagePanel.setVisible(false);
 					}
+					//따봉 이모티콘 버튼
 					else if(obj == v.im_Good_Button) {
 						// 메시지 전송
 						outMsg.println(gson.toJson(new Message(v.nickname, "", "(따봉)", "img")));
