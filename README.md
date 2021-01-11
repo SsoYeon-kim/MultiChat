@@ -12,7 +12,7 @@
 ## 2. 코드   
 #### [서버]   
 1-1. 소켓 생성 및 연결   
-1-2. 귓속말(type에 따른 메시지 처리)   
+1-2. type에 따른 메시지 처리(귓속말, 이모티콘, 채팅 등) 
 
 #### [Model, 메시지 규격] - M   
 2-1. Model - M   
@@ -36,7 +36,7 @@
 Multichat_Server.java에 해당한다. 서버 소켓과 클라이언트 연결 소켓을 생성하고 클라이언트에 대한 스레드를 내부 클래스로 생성하여 관리한다.
 
 <pre><code>
-boolean status;
+	boolean status;
 	// 서버 소켓 및 클라이언트 연결 소켓
 	private ServerSocket ss = null;
 	private Socket s = null;
@@ -86,14 +86,20 @@ boolean status;
 		}
 	}
 	
+	```
+	public static void main(String[] args) {
+		MultiChat_Server server = new MultiChat_Server();
+		server.start();
+	}
+	
 </code></pre>
 
-### 귓속말(type에 따른 메시지 처리)   
+### type에 따른 메시지 처리(귓속말, 이모티콘, 채팅 등) 
 
 아래의 코드는 내부클래스인 ChatThread이다.
 
 <pre><code>
-class ChatThread extends Thread
+	class ChatThread extends Thread
 	{	
 		
 		// 수신 메세지 및 파싱 메시지 처리를 위한 변수 선언
@@ -162,8 +168,13 @@ class ChatThread extends Thread
                         }
 
 					}
+					//이모티콘 메시지일 때
+					else if(m.getType().equals("img"))
+					{
+						msgSendAll(msg);
+					}
 					//전체 메시지일 때
-					else
+					else if(m.getType().equals("msg"))
 					{
 						msgSendAll(msg);
 					}
@@ -184,9 +195,10 @@ class ChatThread extends Thread
 </code></pre>
 
 클라이언트와 서버 간의 메시지 규격 중 type에 따라 구분한다. 메시지 규격은 Message.java에 정의되어 있으며 후에 설명하도록 한다.   
-현재 type에는 login, logout, secret, msg가 있다.   
+현재 type에는 login, logout, secret, msg, img가 있다.   
 login type일 때 접속한 스레드의 이름을 사용자가 지정한 닉네임으로 설정하게 된다. 귓속말은 secret type으로 사용자가 귓속말 할 상대의 닉네임을 설정하게 되면 해당 닉네임의 이름을 가진 스레드에만 메시지가 출력되도록 설정했다.   
 msg는 기본적인 채팅을 할 때 사용자가 입력한 것으로 연결된 모든 스레드에게 전송된다.   
+img는 이모티콘을 보낼 때 사용되는 type으로 연결된 모든 스레드에 전송되도록 했다.
 
 ## [M]odel, 메시지 규격
 
@@ -220,61 +232,92 @@ MVC패턴의 구성 요소는 아니지만 통신에 사용하는 JSON규격의 
 아래의 코드는 Message.java이다.
 
 <pre><code>
-private String msg;		  // 채팅메시지
-	private String type;	  // 메시지 유형(로그인, 로그아웃, 메시지 전달)
-	private String nickname;  // 닉네임
-	private String secretReceiver; // 귓속말 상대
+	JTextPane msgOut;
 	
-	public Message() 
+	//하트 이모티콘
+	ImageIcon O_Heart_icon = new ImageIcon(MultiChatData.class.getResource("/Heart.png"));
+	Image O_Heart_img = O_Heart_icon.getImage();
+	Image Heart_img = O_Heart_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+	ImageIcon Heart_icon = new ImageIcon(Heart_img);
+	//화남 이모티콘
+	ImageIcon O_Angry_icon = new ImageIcon(MultiChatData.class.getResource("/Angry.png"));
+	Image O_Angry_img = O_Angry_icon.getImage();
+	Image Angry_img = O_Angry_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+	ImageIcon Angry_icon = new ImageIcon(Angry_img);
+	//따봉 이모티콘
+	ImageIcon O_Good_icon = new ImageIcon(MultiChatData.class.getResource("/Good.png"));
+	Image O_Good_img = O_Good_icon.getImage();
+	Image Good_img = O_Good_img.getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+	ImageIcon Good_icon = new ImageIcon(Good_img);
+		
+	//데이터를 변경할 때 업데이트할 UI 컴포넌트를 등록
+	public void addObj(JComponent comp)
 	{
-		// TODO Auto-generated constructor stub
+		this.msgOut = (JTextPane)comp;
 	}
-
-	public Message(String nickname, String secretReceiver, String msg ,String type) 
-	{
-		this.nickname = nickname;
-		this.secretReceiver = secretReceiver;
-		this.msg =msg;
-		this.type = type;
-	}
-
 	
-	public String getSecretReceiver() 
+	//UI데이터(채팅,이모티콘)를 업데이트
+	void refreshData(String msg) 
 	{
-		return secretReceiver;
-	}
-	public void setSecretReceiver(String secretReceiver) 
-	{
-		this.secretReceiver = secretReceiver;
-	}
-	public String getMsg()
-	{
-		return msg;
-	}
-	public void setMsg(String msg)
-	{
-		this.msg = msg;
-	}
-	public String getType() 
-	{
-		return type;
-	}
-	public void setType(String type) 
-	{
-		this.type = type;
-	}
-	public String getNickname() 
-	{
-		return nickname;
-	}
-	public void setNickname(String nickname) 
-	{
-		this.nickname = nickname;
+		StyledDocument doc = msgOut.getStyledDocument();
+		
+		//하트 이모티콘
+		if (msg.contains("(하트)")) {
+			try {
+				doc.insertString(doc.getLength(),msg, null);
+
+			} catch (BadLocationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			msgOut.insertComponent(new JLabel(Heart_icon));
+			
+		}
+		//화남 이모티콘
+		else if(msg.contains("(화남)")) {
+			
+			try {
+				doc.insertString(doc.getLength(), msg, null);
+
+			} catch (BadLocationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			msgOut.insertComponent(new JLabel(Angry_icon));
+			
+		}
+		//따봉 이모티콘
+		else if(msg.contains("(따봉)")) {
+			
+			try {
+				doc.insertString(doc.getLength(), msg, null);
+
+			} catch (BadLocationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			msgOut.insertComponent(new JLabel(Good_icon));
+			
+		}
+		//채팅
+		else {
+			try {
+				doc.insertString(doc.getLength(), msg, null);
+
+			} catch (BadLocationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 </code></pre>
 
 사용자의 아이디와 패스워드는 Controller와 연결되지 않는 별도의 UI로 채팅창에 접속하기 위해서만 사용되므로 Message규격에는 포함하지 않았다.   
 사용자가 지정하는 본인의 닉네임과 귓속말을 할 때 귓속말 상대인 secretReceiver와 채팅 메시지인 msg와 앞서 언급한 type이 메시지 규격에 포함된다.   
+이모티콘을 보낼 경우 후에 Controller에서 msg에 해당 이모티콘의 이름을 보내고 해당되는 이모티콘 이름에 따른 처리를 했다.   
 
 ## [V]iew UI
 
@@ -548,12 +591,17 @@ public Chat_GUI()
       msgInput.addActionListener(listener);
       saveButton.addActionListener(listener);
       secretButton.addActionListener(listener);
+      imageButton.addActionListener(listener);
+      im_Love_Button.addActionListener(listener);
+      im_Angry_Button.addActionListener(listener);
+      im_Good_Button.addActionListener(listener);
    }
 
 </code></pre>
 
 앞선 Login_GUI.java와 Join_GUI.java와는 다르게 클래스 내부에서 해당하는 컴포넌트의 이벤트를 처리하지 않고 Controller에서 처리하도록 하였다.   
-각 컴포넌트에 해당하는 이벤트는 다음으로 설명할 컨트롤러에서 보도록 한다.
+각 컴포넌트에 해당하는 이벤트는 다음으로 설명할 컨트롤러에서 보도록 한다.    
+위의 코드에 msgInput은 사용자들의 채팅이 오가는 창이다. 이는 JTextArea로 설정할 시 이모티콘을 창에 띄울 수 없다. 따라서 JTextPane으로 설정해야 한다.   
 
 ## [C]ontroller 
 
@@ -562,12 +610,14 @@ public Chat_GUI()
 <pre><code>
 ```
 
+	Logger logger;
+
 	// 뷰 클래스 참조 객체
 	private final Chat_GUI v;
 	// 데이터 클래스 참조 객체
 	private final MultiChatData chatData;
 	
-public MultiChatController(MultiChatData chatData, Chat_GUI v)
+	public MultiChatController(MultiChatData chatData, Chat_GUI v)
 		{
 			// 로거 객체 초기화
 			logger = Logger.getLogger(this.getClass().getName());
@@ -588,6 +638,21 @@ public MultiChatController(MultiChatData chatData, Chat_GUI v)
 아래의 코드는 서버와 연결하는 connectServer함수의 코드이다.   
 
 <pre><code>
+	private String ip = "127.0.0.1";
+	private Socket socket;
+	private BufferedReader inMsg = null;
+	private PrintWriter outMsg = null;
+
+	Gson gson = new Gson();
+	
+	Message m;
+	
+	Thread thread;
+	
+	boolean status;
+	
+	```
+	
 public void connectServer()
 	{
 		try
@@ -611,6 +676,8 @@ public void connectServer()
 				e.printStackTrace();
 			}
 	}
+	
+	```
 </code></pre>
 
 소켓을 생성하고 서버에 로그인 메시지를 전달한다. Message.java에 정의한 메시지 규격인 nickname, secretReceiver, msg, type에 맞춰 전달하게 되고 이때 type을 login으로 하여 서버에서 type에 맞는 처리를 하도록 한다.   
@@ -621,10 +688,13 @@ View에 해당하는 Chat_GUI.java에서 위임한 동적인 요소를 처리하
 다음은 appMain함수의 코드이다.   
 
 <pre><code>
+	String path = "C:/MultiChatInfo/msgSave";
 
-```
+	File Folder = new File(path);
+	
+	```
 
-// 데이터 객체에서 데이터 변화를 처리할 UI 객체 추가       
+	// 데이터 객체에서 데이터 변화를 처리할 UI 객체 추가       
 	public void appMain()        
 		{
 			chatData.addObj(v.msgOut);
@@ -669,6 +739,9 @@ View에 해당하는 Chat_GUI.java에서 위임한 동적인 요소를 처리하
 					//메세지 입력
 					else if(obj == v.msgInput)
 					{
+						if(v.msgInput.getText().isEmpty()) {
+							JOptionPane.showMessageDialog(v, "대화를 입력하세요.");
+						}
 						// 메시지 전송
 						outMsg.println(gson.toJson(new Message(v.nickname, "", v.msgInput.getText(), "msg")));
 						// 입력 창 클리어
@@ -679,11 +752,15 @@ View에 해당하는 Chat_GUI.java에서 위임한 동적인 요소를 처리하
 					{
 						v.secretReciever = v.recieverInput.getText();	
 						
-						if(v.msgInput.getText().isEmpty()) {
+						if(v.secretReciever.isEmpty()) {
+							JOptionPane.showMessageDialog(v, "귓속말 상대의 닉네임을 입력해주세요.");
+						}
+						else if(v.msgInput.getText().isEmpty()) {
 							JOptionPane.showMessageDialog(v, "대화를 입력한 후 누르세요.");
 						}
 						else {
 							outMsg.println(gson.toJson(new Message(v.nickname, v.secretReciever, v.msgInput.getText(), "secret")));
+							v.msgInput.setText("");
 						}
 						
 					}
@@ -704,7 +781,7 @@ View에 해당하는 Chat_GUI.java에서 위임한 동적인 요소를 처리하
 						
 						//대화내용 저장
 						try {	
-								SimpleDateFormat dataformat = new SimpleDateFormat ( "yyyy년 MM월 dd일 HH시 mm분 ss초");
+								SimpleDateFormat dataformat = new SimpleDateFormat ("yyyy년 MM월 dd일 HH시 mm분 ss초");
 								String time = dataformat.format (System.currentTimeMillis());
 								
 								File saveFile = new File(path + File.separator + v.nickname + "님의 대화저장.txt");
@@ -719,15 +796,38 @@ View에 해당하는 Chat_GUI.java에서 위임한 동적인 요소를 처리하
 	                          }
 						
 					}
+					//이모티콘 버튼
+					else if(obj == v.imageButton) {
+						v.imagePanel.setVisible(true);
+					}
+					//하트 이모티콘 버튼
+					else if(obj == v.im_Love_Button) {
+						// 메시지 전송
+						outMsg.println(gson.toJson(new Message(v.nickname, "", "(하트)", "img")));
+						v.imagePanel.setVisible(false);
+					}
+					//화남 이모티콘 버튼
+					else if(obj == v.im_Angry_Button) {
+						// 메시지 전송
+						outMsg.println(gson.toJson(new Message(v.nickname, "", "(화남)", "img")));
+						v.imagePanel.setVisible(false);
+					}
+					//따봉 이모티콘 버튼
+					else if(obj == v.im_Good_Button) {
+						// 메시지 전송
+						outMsg.println(gson.toJson(new Message(v.nickname, "", "(따봉)", "img")));
+						v.imagePanel.setVisible(false);
+					}
 				}
 			});
 				
 		}
-```
+		
+	```
 
 </code></pre>
 
-MultiChatData.java의 함수 addObj에 채팅이 출력되는 JTextArea인 msgOut를 등록한 후 각 컴포넌트에 대한 이벤트 처리를 한다.   
+MultiChatData.java의 함수 addObj에 채팅이 출력되는 JText인 msgOut를 등록한 후 각 컴포넌트에 대한 이벤트 처리를 한다.   
 저장 버튼을 누르게 되면 채팅내용을 저장할 폴더를 생성하고 폴더 안에 저장 버튼을 누른 사용자의 닉네임으로 .txt파일이 저장된다. 동일한 사용자가 저장 버튼을 다시 누르게 되면 같은 파일에 저장되지만 이를 구분하기 위해 저장 버튼을 누를 때 해당하는 년 / 월 / 일 / 시 / 분 / 초를 포함하여 구분할 수 있게 했다.   
 
 <img src= "~~~~~~" width=30%>
@@ -740,7 +840,7 @@ MultiChat_Server.java에서 Thread 클래스를 상속받았기 때문에 자바
 
 ```
 
-public void run()
+	public void run()
 	{
 		// 수신 메시지를 처리하는 데 필요한 변수 선언
 		String msg;
@@ -765,13 +865,18 @@ public void run()
 						chatData.refreshData("  << " + m.getNickname() + ">>" + "  : " + m.getMsg() + "\n");
 					}
 					//채팅
-					else {
+					else if(m.getType().equals("msg")) {
 						chatData.refreshData("  [ " + m.getNickname() + "]" + "  : " + m.getMsg() + "\n");
 					}
+					//이모티콘
+					else {
+						chatData.refreshData("  < " + m.getNickname() + "  님이 보낸  " + m.getMsg() + "이모티콘 \n");
+					}
 				}
-					
+				
 				// 커서를 현재 대화 메시지에 표현
 				v.msgOut.setCaretPosition(v.msgOut.getDocument().getLength());
+				
 			}catch (IOException e)
 				{
 					System.out.println("[MultiChatUI]메시지 스트림 종료!!");
@@ -779,10 +884,11 @@ public void run()
 		}
 		//logger.info("[CHATUI]"+thread.getName());
 	}
+	
 ```
 
 </code></pre>
 
 MultiChatData.java의 함수인 refreshData를 이용하여 메시지 규격에 맞춰 UI데이터를 업데이트 해준다.   
-로그인, 로그아웃 / 귓속말 채팅 / 전체 채팅 의 경우로 나누어 출력의 형태를 다르게 설정하였다.   
+로그인, 로그아웃 / 귓속말 채팅 / 이모티콘 / 전체 채팅 의 경우로 나누어 출력의 형태를 다르게 설정하였다.   
 
