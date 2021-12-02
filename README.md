@@ -831,7 +831,8 @@ View에 해당하는 Chat_GUI.java에서 위임한 동적인 요소를 처리하
 MultiChatData.java의 함수 addObj에 채팅이 출력되는 JText인 msgOut를 등록한 후 각 컴포넌트에 대한 이벤트 처리를 한다.   
 저장 버튼을 누르게 되면 채팅내용을 저장할 폴더를 생성하고 폴더 안에 저장 버튼을 누른 사용자의 닉네임으로 .txt파일이 저장된다. 동일한 사용자가 저장 버튼을 다시 누르게 되면 같은 파일에 저장되지만 이를 구분하기 위해 저장 버튼을 누를 때 해당하는 년 / 월 / 일 / 시 / 분 / 초를 포함하여 구분할 수 있게 했다.   
 
-<img src= "https://user-images.githubusercontent.com/62587484/104156765-20791600-542d-11eb-8859-8aa5ab53930c.PNG" width=60%>
+<img src= "https://user-images.githubusercontent.com/62587484/104156765-20791600-542d-11eb-8859-8aa5ab53930c.PNG" width=60%>   
+
 ### run 함수
 
 MultiChat_Server.java에서 Thread 클래스를 상속받았기 때문에 자바는 다중 상속을 지원하지 않으므로 Runnable 인터페이스를 구현하는 방법으로 하였다.   
