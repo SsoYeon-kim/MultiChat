@@ -894,4 +894,4 @@ MultiChat_Server.java에서 Thread 클래스를 상속받았기 때문에 자바
 MultiChatData.java의 함수인 refreshData를 이용하여 메시지 규격에 맞춰 UI데이터를 업데이트 해준다.   
 로그인, 로그아웃 / 귓속말 채팅 / 이모티콘 / 전체 채팅 의 경우로 나누어 출력의 형태를 다르게 설정하였다.   
 아래의 사진은 실행 화면을 보여준다.   
-<img src= "https://user-images.githubusercontent.com/62587484/104156884-58805900-542d-11eb-9642-3c8e06ae1aad.PNG" width=80%>
+<img src= "https://user-images.githubusercontent.com/62587484/104156884-58805900-542d-11eb-9642-3c8e06ae1aad.PNG" width=100%>
